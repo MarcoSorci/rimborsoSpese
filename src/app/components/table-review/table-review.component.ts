@@ -7,7 +7,9 @@ import { InsertService } from 'src/app/services/insert.service';
   styleUrls: ['./table-review.component.scss'],
 })
 export class TableReviewComponent {
+  
   constructor(private serv: InsertService) {}
+
   displayedColumns: string[] = [
     'date',
     'type',

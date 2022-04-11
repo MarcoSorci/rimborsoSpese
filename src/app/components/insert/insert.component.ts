@@ -52,6 +52,7 @@ export class InsertComponent {
     {value: 'true', viewValue: 'Yes'},
     {value: 'false', viewValue: 'No'}
   ]
+  
 
   insert(newExpense:Expense) {
     newExpense = this.expenseModel
