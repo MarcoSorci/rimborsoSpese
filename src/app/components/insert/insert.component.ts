@@ -37,7 +37,7 @@ export class InsertComponent {
     date: '',
     type: '',
     amount: 0,
-    hasReceipt: false,
+    hasReceipt: '',
     notes: ''
   }
 

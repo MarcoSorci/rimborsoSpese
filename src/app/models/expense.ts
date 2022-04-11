@@ -2,6 +2,6 @@ export interface Expense {
   date: string;
   type: string;
   amount: number;
-  hasReceipt: boolean;
+  hasReceipt: string;
   notes?: string;
 }
