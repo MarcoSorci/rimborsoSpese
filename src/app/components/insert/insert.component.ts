@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDateFormats, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { Expense } from 'src/app/models/expense';
+import { InsertService } from 'src/app/services/insert.service';
+
 
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
@@ -14,6 +17,11 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
   }
 };
 
+export interface Types{
+  value:string
+  viewValue:string
+}
+
 @Component({
   selector: 'app-insert',
   templateUrl: './insert.component.html',
@@ -21,10 +29,33 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 })
 export class InsertComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private serv: InsertService) {}
 
-  insert() {
-    this.router.navigate(['table']);
+  selected = ''
+
+  expenseModel: Expense = {
+    date: '',
+    type: '',
+    amount: 0,
+    hasReceipt: false,
+    notes: ''
+  }
+
+  expenseTypes: Types[] = [
+    {value: 'transport', viewValue: 'Transport'},
+    {value: 'lodging', viewValue: 'Lodging'},
+    {value: 'food', viewValue: 'Food'},
+    {value: 'other', viewValue: 'Other'},
+  ];
+
+  receiptBool: Types[] = [
+    {value: 'true', viewValue: 'Yes'},
+    {value: 'false', viewValue: 'No'}
+  ]
+
+  insert(newExpense:Expense) {
+    newExpense = this.expenseModel
+    this.serv.insert(newExpense)
   }
 }
 
