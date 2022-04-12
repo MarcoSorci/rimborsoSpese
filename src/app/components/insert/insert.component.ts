@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDateFormats, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Expense } from 'src/app/models/expense';
@@ -29,7 +30,13 @@ export interface Types{
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 })
 export class InsertComponent {
-  constructor(private router: Router, private serv: InsertService) {}
+
+  dateVal = new FormControl('', [Validators.required]);
+  typeVal = new FormControl('', [Validators.required]);
+  amountVal = new FormControl('', [Validators.required]);
+  receiptVal = new FormControl('', [Validators.required]);
+
+  constructor(public serv: InsertService) {}
 
   selected = ''
 

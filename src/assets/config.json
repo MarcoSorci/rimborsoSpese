@@ -1,0 +1,8 @@
+[
+    {
+        "transport" : 20,
+        "lodging" : 80,
+        "food": 30,
+        "other": 70
+    }
+]

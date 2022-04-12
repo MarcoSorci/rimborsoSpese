@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { InsertService } from 'src/app/services/insert.service';
 
@@ -9,15 +9,18 @@ import { InsertService } from 'src/app/services/insert.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(private router: Router, private serv: InsertService) {}
+  usernameVal = new FormControl('', [Validators.required]);
+  passwordVal = new FormControl('', [Validators.required]);
+
+  constructor(public serv: InsertService) {}
 
   userModel: User = {
     username: '',
-    password: ''
-  }
+    password: '',
+  };
 
-  login(newUser:User) {
-    newUser = this.userModel
-    this.serv.login(newUser)
+  login(newUser: User) {
+    newUser = this.userModel;
+    this.serv.login(newUser);
   }
 }

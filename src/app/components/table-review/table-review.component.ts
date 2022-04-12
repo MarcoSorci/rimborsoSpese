@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Expense } from 'src/app/models/expense';
 import { InsertService } from 'src/app/services/insert.service';
 
 @Component({
@@ -8,14 +9,15 @@ import { InsertService } from 'src/app/services/insert.service';
 })
 export class TableReviewComponent {
   
-  constructor(private serv: InsertService) {}
+  constructor(public serv: InsertService) {}
 
   displayedColumns: string[] = [
     'date',
     'type',
     'amount',
     'hasReceipt',
-    'notes',
+    'notes'
   ];
   dataSource = this.serv.EXPENSE_DATA;
+  clickedRows = new Set<Expense>();
 }

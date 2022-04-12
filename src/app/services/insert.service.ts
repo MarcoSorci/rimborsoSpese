@@ -12,6 +12,7 @@ export class InsertService {
   EXPENSE_DATA: Expense[] = [];
   loggedUser: User[] = [];
   isAuth = false;
+  json = "./assets/config.json";
 
   login(newUser: User) {
     this.loggedUser.push(newUser);
@@ -28,5 +29,9 @@ export class InsertService {
   logout(){
     this.isAuth = false
     this.router.navigate(['login'])
+  }
+
+  validate(){
+
   }
 }

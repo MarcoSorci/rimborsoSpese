@@ -4,4 +4,7 @@ export interface Expense {
   amount: number;
   hasReceipt: string;
   notes?: string;
+
+  approval?: string;
+  reimbursement?: number;
 }

@@ -7,6 +7,6 @@ import { InsertService } from './services/insert.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public serv: InsertService) {}
-  title = 'Rimborso Spese';
+  constructor() {}
+  title = 'Expenses Reimbursement';
 }

@@ -1,17 +1,7 @@
 <div class="container">
+  <app-toolbar></app-toolbar>
 
-  <mat-toolbar color="primary">
-    <span>Rimborso Spese</span>
-    <span class="spacer"></span>
-    <button *ngIf="!serv.isAuth" routerLink="login" mat-flat-button color="primary">Login</button>
-    <button *ngIf="serv.isAuth" routerLink="insert" mat-flat-button color="primary">Insert</button>
-    <button *ngIf="serv.isAuth" routerLink="table" mat-flat-button color="primary">Review Table</button>
-    <button *ngIf="serv.isAuth" onclick="serv.logout()" mat-flat-button color="primary">Logout</button>
-  </mat-toolbar>
-
-
-  <div class="page-content">
-    <router-outlet></router-outlet>
-  </div>
-
+<div class="page-content">
+  <router-outlet></router-outlet>
+</div>
 </div>

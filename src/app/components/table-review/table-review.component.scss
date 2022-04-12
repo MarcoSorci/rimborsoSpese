@@ -1,3 +1,27 @@
 table {
   width: 100%;
 }
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.validation-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 25px;
+  margin: 10px 0px;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-direction: row;
+}
