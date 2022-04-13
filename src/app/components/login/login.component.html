@@ -1,7 +1,7 @@
 <div class="container">
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input [formControl]="usernameVal" matInput [(ngModel)]="userModel.username" required>
+        <input [formControl]="usernameVal" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
     </mat-form-field>
 
     <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">

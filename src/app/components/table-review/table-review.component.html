@@ -54,9 +54,25 @@
 
     <mat-list>
         <mat-list-item *ngFor="let clickedRow of clickedRows">
-            it's valid!
+            <div>
+                <h4 mat-line>{{clickedRow.date | date:'MM/yyyy'}}</h4>
+                <p mat-line>Type: {{clickedRow.type}}</p>
+                <p mat-line>Amount: {{clickedRow.amount + ".00"}}</p>
+            </div>
+
+            <div>
+                <button mat-button (click)="validate(clickedRow)">Validate</button>
+            </div>
+
+            <div id="validation-result">
+                <mat-icon *ngIf="clickedRow.approval">done</mat-icon>
+                <mat-icon *ngIf="!clickedRow.approval">close</mat-icon>
+                <p *ngIf="clickedRow.approval">Reimbursed Amount: {{clickedRow.reimbursement + ".00"}}</p>
+                <p *ngIf="!clickedRow.approval">Sorry, this reimbursement can't go through.</p>
+            </div>
         </mat-list-item>
     </mat-list>
+
 </mat-card>
 
 

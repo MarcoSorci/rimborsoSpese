@@ -20,4 +20,8 @@ export class TableReviewComponent {
   ];
   dataSource = this.serv.EXPENSE_DATA;
   clickedRows = new Set<Expense>();
+
+  validate(exp:Expense){
+    this.serv.validate(exp);
+  }
 }
