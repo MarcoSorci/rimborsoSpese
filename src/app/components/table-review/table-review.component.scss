@@ -28,9 +28,14 @@ ul{
 
 mat-list-item{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 p{
   text-align: center;
+}
+
+.validation-result{
+ visibility: hidden;
 }

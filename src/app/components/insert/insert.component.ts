@@ -37,7 +37,7 @@ export class InsertComponent {
   amountVal = new FormControl('', [Validators.required, Validators.min(1)]);
   receiptVal = new FormControl('', [Validators.required]);
 
-  constructor(public serv: InsertService) {}
+  constructor(public serv: InsertService, public router: Router) {}
 
   selected = '';
 
@@ -64,5 +64,6 @@ export class InsertComponent {
   insert(newExpense: Expense) {
     newExpense = this.expenseModel;
     this.serv.insert(newExpense);
+    this.router.navigate(['table']);
   }
 }

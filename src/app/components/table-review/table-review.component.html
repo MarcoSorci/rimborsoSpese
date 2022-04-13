@@ -44,35 +44,34 @@
 
 
 <mat-card class="validation-cont">
-    <h3>
+    <h2>
         Validation
-    </h3>
+    </h2>
 
     <div *ngIf="!clickedRows.size">
         Click on an expense to check if it is valid.
     </div>
 
-    <mat-list>
-        <mat-list-item *ngFor="let clickedRow of clickedRows">
-            <div>
-                <h4 mat-line>{{clickedRow.date | date:'MM/yyyy'}}</h4>
-                <p mat-line>Type: {{clickedRow.type}}</p>
-                <p mat-line>Amount: {{clickedRow.amount + ".00"}}</p>
-            </div>
+    <mat-list *ngFor="let clickedRow of clickedRows">
+        <mat-list-item>
+            <p mat-line>{{clickedRow.date | date:'MM/yyyy'}}</p>
+            <p mat-line>Type: {{clickedRow.type}}</p>
+            <p mat-line>Amount: {{"€ "+ clickedRow.amount + ".00"}}</p>
+            <button mat-flat-button color="primary" (click)="validate(clickedRow)">Validate</button>
+        </mat-list-item>
 
-            <div>
-                <button mat-button (click)="validate(clickedRow)">Validate</button>
-            </div>
-
-            <div id="validation-result">
-                <mat-icon *ngIf="clickedRow.approval">done</mat-icon>
-                <mat-icon *ngIf="!clickedRow.approval">close</mat-icon>
-                <p *ngIf="clickedRow.approval">Reimbursed Amount: {{clickedRow.reimbursement + ".00"}}</p>
-                <p *ngIf="!clickedRow.approval">Sorry, this reimbursement can't go through.</p>
-            </div>
+        <mat-list-item id="validation-result" style="display: none;">
+            <p *ngIf="clickedRow.approval === 'full'">
+                <mat-icon>done</mat-icon> <br> Reimbursed amount: {{"€ "+ clickedRow.reimbursement + ".00"}}
+            </p>
+            <p *ngIf="clickedRow.approval === 'partial'">
+                <mat-icon>payments</mat-icon> <br> Partial reimbursement, reimbursed amount: {{"€ "+
+                clickedRow.reimbursement + ".00"}}
+            </p>
+            <p *ngIf="clickedRow.approval === 'denied'">
+                <mat-icon>close</mat-icon> <br> Sorry, this reimbursement can't go through.
+            </p>
         </mat-list-item>
     </mat-list>
 
 </mat-card>
-
-

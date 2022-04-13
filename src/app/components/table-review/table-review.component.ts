@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Expense } from 'src/app/models/expense';
 import { InsertService } from 'src/app/services/insert.service';
 
@@ -7,9 +7,15 @@ import { InsertService } from 'src/app/services/insert.service';
   templateUrl: './table-review.component.html',
   styleUrls: ['./table-review.component.scss'],
 })
-export class TableReviewComponent {
+export class TableReviewComponent implements OnInit {
+
+  expenseList: Expense[] = [];
   
   constructor(public serv: InsertService) {}
+
+  ngOnInit(): void {
+    this.serv
+  }
 
   displayedColumns: string[] = [
     'date',
@@ -23,5 +29,10 @@ export class TableReviewComponent {
 
   validate(exp:Expense){
     this.serv.validate(exp);
+    const res = document.getElementById('validation-result')
+    if (res) {
+      res.style.display = 'block';
+    }
+    
   }
 }
