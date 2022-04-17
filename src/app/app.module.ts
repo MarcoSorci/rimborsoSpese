@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavMenuComponent } from './components/toolbar/nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     InsertComponent,
     TableReviewComponent,
     ToolbarComponent,
+    NavMenuComponent,
   ],
   imports: [
     BrowserModule,

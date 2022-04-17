@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { InsertService } from 'src/app/services/insert.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent {
   usernameVal = new FormControl('', [Validators.required]);
   passwordVal = new FormControl('', [Validators.required]);
 
-  constructor(public serv: InsertService) {}
+  constructor(public serv: LoginService) {}
 
   userModel: User = {
     username: '',
