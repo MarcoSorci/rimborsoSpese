@@ -36,7 +36,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row (click)="clickedRows.add(row)" [class.row-is-clicked]="clickedRows.has(row)"
+    <tr mat-row (click)="validate(row); clickedRows.add(row)" [class.row-is-clicked]="clickedRows.has(row)"
         *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
@@ -57,10 +57,9 @@
             <p mat-line>{{clickedRow.date | date:'MM/yyyy'}}</p>
             <p mat-line>Type: {{clickedRow.type}}</p>
             <p mat-line>Amount: {{"€ "+ clickedRow.amount + ".00"}}</p>
-            <button mat-flat-button color="primary" (click)="validate(clickedRow)">Validate</button>
         </mat-list-item>
 
-        <mat-list-item id="validation-result" style="display: none;">
+        <mat-list-item id="validation-result">
             <p *ngIf="clickedRow.approval === 'full'">
                 <mat-icon>done</mat-icon> <br> Reimbursed amount: {{"€ "+ clickedRow.reimbursement + ".00"}}
             </p>

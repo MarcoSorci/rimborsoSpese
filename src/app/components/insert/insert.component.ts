@@ -7,7 +7,7 @@ import {
 } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Expense } from 'src/app/models/expense';
-import { InsertService } from 'src/app/services/insert.service';
+import { ExpenseService } from 'src/app/services/expense.service';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   ...MAT_NATIVE_DATE_FORMATS,
@@ -32,12 +32,12 @@ export interface Types {
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 })
 export class InsertComponent {
- dateVal = new FormControl('', [Validators.required]);
+  dateVal = new FormControl('', [Validators.required]);
   typeVal = new FormControl('', [Validators.required]);
   amountVal = new FormControl('', [Validators.required, Validators.min(1)]);
   receiptVal = new FormControl('', [Validators.required]);
 
-  constructor(public serv: InsertService, public router: Router) {}
+  constructor(public serv: ExpenseService, public router: Router) {}
 
   selected = '';
 
@@ -63,7 +63,12 @@ export class InsertComponent {
 
   insert(newExpense: Expense) {
     newExpense = this.expenseModel;
-    this.serv.insert(newExpense);
+    this.serv.insert(newExpense).subscribe({
+      next: (data) => {
+        this.serv.addRequest(data);
+      },
+      error: () => {},
+    });
     this.router.navigate(['table']);
   }
 }

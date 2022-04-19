@@ -1,6 +1,7 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { Expense } from 'src/app/models/expense';
-import { InsertService } from 'src/app/services/insert.service';
+import { ExpenseService } from 'src/app/services/expense.service';
 
 @Component({
   selector: 'app-table-review',
@@ -10,11 +11,12 @@ import { InsertService } from 'src/app/services/insert.service';
 export class TableReviewComponent implements OnInit {
 
   expenseList: Expense[] = [];
+
   
-  constructor(public serv: InsertService) {}
+  constructor(public serv: ExpenseService) {}
 
   ngOnInit(): void {
-    this.serv
+    this.serv.getExpenses();
   }
 
   displayedColumns: string[] = [
@@ -24,15 +26,17 @@ export class TableReviewComponent implements OnInit {
     'hasReceipt',
     'notes'
   ];
-  dataSource = this.serv.EXPENSE_DATA;
+
+  dataSource = this.serv.expenseList;
   clickedRows = new Set<Expense>();
 
   validate(exp:Expense){
     this.serv.validate(exp);
     const res = document.getElementById('validation-result')
-    if (res) {
-      res.style.display = 'block';
-    }
-    
+    res?.setAttribute('id', 'validation-result'+ Math.random().toString(16).slice(2));
   }
+
+
+
+  
 }

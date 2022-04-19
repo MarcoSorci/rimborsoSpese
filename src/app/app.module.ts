@@ -24,6 +24,9 @@ import { MatListModule } from '@angular/material/list';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavMenuComponent } from './components/toolbar/nav-menu/nav-menu.component';
+import { RegisterComponent } from './components/register/register.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { NavMenuComponent } from './components/toolbar/nav-menu/nav-menu.compone
     TableReviewComponent,
     ToolbarComponent,
     NavMenuComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ import { NavMenuComponent } from './components/toolbar/nav-menu/nav-menu.compone
     MatTableModule,
     MatCardModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

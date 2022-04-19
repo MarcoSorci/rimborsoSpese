@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.button-cont {
+    flex-direction: row;
+}
+
+button {
+    margin: 0px 10px;
+    line-height: 22px;
+    padding: 10px 30px;
+}
+
+mat-error {
+    margin-bottom: 20px;
+}
+
+mat-form-field {
+    width: 20%;
+}

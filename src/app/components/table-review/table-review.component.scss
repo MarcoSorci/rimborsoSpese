@@ -26,6 +26,13 @@ ul{
   flex-direction: row;
 }
 
+mat-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
 mat-list-item{
   display: flex;
   flex-direction: column;

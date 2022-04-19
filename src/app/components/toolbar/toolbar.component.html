@@ -2,7 +2,7 @@
     <mat-toolbar color="primary">
     <span>Expenses Reimbursement</span>
     <span class="spacer"></span>
-    <button *ngIf="!serv.isAuth" routerLink="login" mat-flat-button color="primary">Login</button>
+    <button *ngIf="!serv.isAuth" routerLink="login" mat-flat-button color="primary">Login/Register</button>
     <app-nav-menu></app-nav-menu>
     <button *ngIf="serv.isAuth" (click)="serv.logout()" mat-flat-button color="primary">Logout</button>
   </mat-toolbar>

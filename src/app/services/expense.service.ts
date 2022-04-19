@@ -6,24 +6,32 @@ import { Expense } from '../models/expense';
 @Injectable({
   providedIn: 'root',
 })
-export class InsertService {
+export class ExpenseService {
+  private readonly EXP_API =
+    'https://6248018d4bd12c92f4064156.mockapi.io/expenses';
 
   public expenseList = new BehaviorSubject<Expense[]>([]);
 
-  private readonly EXP_API = 'https://6248018d4bd12c92f4064156.mockapi.io/expenses'
-  constructor(private http: HttpClient) {}
-
-  EXPENSE_DATA: Expense[] = [];
-  
-  limitConfig = { transport: 20, lodging: 80, food: 30, other: 70 };
-
-  
-
-  insert(newExpense: Expense) {
-    //this.EXPENSE_DATA.push(newExpense);
-    return this.http.post(this.EXP_API, newExpense)
+  constructor(private http: HttpClient) {
   }
 
+  limitConfig = { transport: 20, lodging: 80, food: 30, other: 70 };
+
+  getExpenses() {
+    this.http
+      .get<Expense[]>(this.EXP_API)
+      .subscribe((exp) => this.expenseList.next(exp));
+  }
+
+  insert(newExpense: Expense) {
+    return this.http.post(this.EXP_API, newExpense);
+  }
+
+  addRequest(exp: any) {
+    let expArray = this.expenseList.value;
+    expArray.push(exp);
+    this.expenseList.next(expArray);
+  }
 
   validate(exp: Expense) {
     if (exp.hasReceipt === 'true') {
@@ -48,6 +56,8 @@ export class InsertService {
           exp
         );
       }
+    } else {
+      exp.approval = 'denied';
     }
   }
 

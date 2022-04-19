@@ -1,0 +1,41 @@
+<div class="container">
+    <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input [formControl]="usernameVal" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
+    </mat-form-field>
+
+    <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
+        Username is mandatory.
+    </mat-error>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input [formControl]="passwordVal" matInput type="password" [(ngModel)]="userModel.password" required>
+    </mat-form-field>
+
+    <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">
+        Password is mandatory.
+    </mat-error>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Confirm Password</mat-label>
+        <input [formControl]="pswConfirmVal" matInput type="password" [(ngModel)]="userModel.password" required>
+    </mat-form-field>
+
+    <mat-error *ngIf="pswConfirmVal.invalid && pswConfirmVal.touched">
+        Password is mandatory.
+    </mat-error>
+
+    <div class="button-cont">
+        <button type="submit" (click)="registerEmployee(userModel)"
+            [disabled]="usernameVal.invalid || passwordVal.invalid" mat-flat-button color="primary">Register <br> Employee
+        </button>
+
+        <button type="submit" (click)="registerAdmin(userModel)" [disabled]="usernameVal.invalid || passwordVal.invalid"
+            mat-flat-button color="primary">Register <br> Admin
+        </button>
+    </div>
+
+
+
+</div>

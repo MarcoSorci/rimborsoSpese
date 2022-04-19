@@ -17,8 +17,11 @@
         Password is mandatory.
     </mat-error>
 
-    <button type="submit" (click)="login(userModel)" [disabled]="usernameVal.invalid || passwordVal.invalid"
+    <button type="submit" (click)="login()" [disabled]="usernameVal.invalid || passwordVal.invalid"
         mat-flat-button color="primary">Login
     </button>
+
+    <span style="margin-top: 20px;">If you're not yet registered, go to the <a href="./register">registration
+            page.</a></span>
 
 </div>
