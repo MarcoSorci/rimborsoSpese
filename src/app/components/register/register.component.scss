@@ -1,26 +1,53 @@
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.button-cont {
-    flex-direction: row;
+#spinner-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.438);
+}
+
+mat-spinner {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+}
+
+
+.admin-access {
+  text-align: center;
+}
+
+input.admin-access::-webkit-outer-spin-button,
+input.admin-access::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.admin-access {
+  -moz-appearance: textfield;
 }
 
 button {
-    margin: 0px 10px;
-    line-height: 22px;
-    padding: 10px 30px;
+  margin: 0px 10px;
+  line-height: 22px;
+  padding: 10px 30px;
 }
 
 mat-error {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 mat-form-field {
-    width: 20%;
+  min-width: 20%;
 }

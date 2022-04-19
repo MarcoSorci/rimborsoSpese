@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 
 import { InsertComponent } from './components/insert/insert.component';
 import { LoginComponent } from './components/login/login.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NavMenuComponent } from './components/toolbar/nav-menu/nav-menu.component';
+import { RegisterComponent } from './components/register/register.component';
+
 import { TableReviewComponent } from './components/table-review/table-review.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,12 +26,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { HttpClientModule } from '@angular/common/http';
-import { NavMenuComponent } from './components/toolbar/nav-menu/nav-menu.component';
-import { RegisterComponent } from './components/register/register.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatListModule,
     HttpClientModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

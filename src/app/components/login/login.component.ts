@@ -23,6 +23,11 @@ export class LoginComponent {
   };
 
   login() {
+    const spinner = document.getElementById('spinner-overlay');
+    if (spinner) {
+      spinner.style.display = 'flex';
+    }
+    
     this.serv
       .login(this.userModel.username, this.userModel.password)
       .subscribe({
@@ -31,6 +36,9 @@ export class LoginComponent {
           if (user) {
             this.router.navigate(['table']);
           } else {
+            if (spinner) {
+              spinner.style.display = 'none';
+            }
             this.snack.open('User not Found!', '', {
               duration: 2 * 1000,
             });

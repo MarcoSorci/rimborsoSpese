@@ -43,10 +43,4 @@ export class UserService {
     this.isAuth = true;
     return this.http.post<User>(this.USER_API, newUser);
   }
-
-  addUser(user: any) {
-    let userArray = this.userList.value;
-    userArray.push(user);
-    this.userList.next(userArray);
-  }
 }
