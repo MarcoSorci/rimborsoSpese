@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
+import { UserService } from 'src/app/services/user.service';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   ...MAT_NATIVE_DATE_FORMATS,
@@ -37,7 +38,11 @@ export class InsertComponent {
   amountVal = new FormControl('', [Validators.required, Validators.min(1)]);
   receiptVal = new FormControl('', [Validators.required]);
 
-  constructor(public serv: ExpenseService, public router: Router) {}
+  constructor(
+    public serv: ExpenseService,
+    public userServ: UserService,
+    public router: Router
+  ) {}
 
   selected = '';
 
@@ -47,6 +52,7 @@ export class InsertComponent {
     amount: 0,
     hasReceipt: '',
     notes: '',
+    id: '',
   };
 
   expenseTypes: Types[] = [
@@ -62,10 +68,14 @@ export class InsertComponent {
   ];
 
   insert(newExpense: Expense) {
+    console.log("id al service" + this.userServ.userId);
+    
+    newExpense.userId = this.userServ.userId;
     newExpense = this.expenseModel;
     this.serv.insert(newExpense).subscribe({
       next: (data) => {
         this.serv.addRequest(data);
+        console.log(data);
       },
       error: () => {},
     });

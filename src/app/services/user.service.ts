@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -17,6 +17,7 @@ export class UserService {
 
   public user?: User;
   public isAuth = false;
+  public userId? = '';
 
   login(username: string, psw: string) {
    return this.http.get<User[]>(this.USER_API + '?username=' + username).pipe(
@@ -27,6 +28,7 @@ export class UserService {
         if (user) {
           this.user = user;
           this.isAuth = true;
+          this.userId = user.id;
         }
         return user;
       })
@@ -41,6 +43,8 @@ export class UserService {
 
   register(newUser: User) {
     this.isAuth = true;
+    this.user = newUser;
+    this.userId = this.user.id;
     return this.http.post<User>(this.USER_API, newUser);
   }
 }

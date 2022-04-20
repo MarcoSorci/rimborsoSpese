@@ -10,7 +10,7 @@ export class ExpenseService {
   private readonly EXP_API =
     'https://6248018d4bd12c92f4064156.mockapi.io/expenses';
 
-  public expenseList = new BehaviorSubject<Expense[]>([]);
+  public expenseList$ = new BehaviorSubject<Expense[]>([]);
 
   constructor(private http: HttpClient) {
   }
@@ -20,7 +20,7 @@ export class ExpenseService {
   getExpenses() {
     this.http
       .get<Expense[]>(this.EXP_API)
-      .subscribe((exp) => this.expenseList.next(exp));
+      .subscribe((exp) => this.expenseList$.next(exp));
   }
 
   insert(newExpense: Expense) {
@@ -28,9 +28,9 @@ export class ExpenseService {
   }
 
   addRequest(exp: any) {
-    let expArray = this.expenseList.value;
+    let expArray = this.expenseList$.value;
     expArray.push(exp);
-    this.expenseList.next(expArray);
+    this.expenseList$.next(expArray);
   }
 
   validate(exp: Expense) {
@@ -69,5 +69,9 @@ export class ExpenseService {
       exp.approval = 'partial';
       return refValue;
     }
+  }
+
+  delete(id:string){
+    return this.http.delete<any>(this.EXP_API + '/' + id);
   }
 }
