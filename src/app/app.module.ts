@@ -29,7 +29,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import {MatSortModule} from '@angular/material/sort';
     ToolbarComponent,
     NavMenuComponent,
     RegisterComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatButtonToggleModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-table-review',
@@ -11,14 +13,18 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./table-review.component.scss'],
 })
 export class TableReviewComponent implements OnInit {
-  constructor(public serv: ExpenseService, public userServ: UserService) {}
+  @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
+
+  constructor(
+    public dialog: MatDialog,
+    public serv: ExpenseService,
+    public userServ: UserService
+  ) {}
 
   ngOnInit(): void {
     this.serv.getExpenses();
     //this.userServ.userId = ;
   }
-
-  
 
   displayedColumns: string[] = [
     'date',
@@ -29,19 +35,49 @@ export class TableReviewComponent implements OnInit {
     'actions',
   ];
 
-  //dataSource = new MatTableDataSource<Expense>(this.serv.expenseList$.value);
-  dataSource = this.serv.expenseList$;
+  matDataSource = new MatTableDataSource<Expense>(this.serv.expenseList.value);
+  dataSource = this.serv.expenseList;
   clickedRows = new Set<Expense>();
 
-  // @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  // ngAfterViewInit() {
-  //   this.dataSource.sort = this.sort;
-  // }
+  ngAfterViewInit() {
+    this.matDataSource.sort = this.sort;
+  }
+
+  openDialog(action: any, obj: { action: any; }) {
+    this.clickedRows.clear();
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '250px',
+      data: obj,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.event == 'Update') {
+        this.updateRowData(result.data);
+      } else if (result.event == 'Delete') {
+        this.deleteRowData(result.data);
+      }
+    });
+  }
+
+  updateRowData(exp: Expense) {
+    // TO SUBSTITUTE WITH PUT REQUEST
+
+
+    // this.dataSource.value.filter((value, key) => {
+    //   if (value.id == row_obj.id) {
+    //     value.type = row_obj.type;
+    //   }
+    //   return true;
+    // });
+  }
 
   validate(exp: Expense) {
     console.log(exp);
 
+    this.clickedRows.clear();
     this.serv.validate(exp);
     const res = document.getElementById('validation-result');
     res?.setAttribute(
@@ -50,14 +86,12 @@ export class TableReviewComponent implements OnInit {
     );
   }
 
-  delete(exp: Expense) {
+  deleteRowData(exp: Expense) {
     console.log(exp);
 
-    this.serv
-      .delete(exp.id)
-      .subscribe({
-        next: () => this.serv.getExpenses(),
-        complete: () => this.clickedRows.clear(),
-      });
+    this.serv.delete(exp.id).subscribe({
+      next: () => this.serv.getExpenses(),
+      complete: () => this.clickedRows.clear(),
+    });
   }
 }
