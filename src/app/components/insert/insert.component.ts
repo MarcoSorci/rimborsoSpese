@@ -68,9 +68,7 @@ export class InsertComponent {
   ];
 
   insert(newExpense: Expense) {
-    console.log("id al service" + this.userServ.userId);
-    
-    newExpense.userId = this.userServ.userId;
+    newExpense.userName = this.userServ.user?.username;
     newExpense = this.expenseModel;
     this.serv.insert(newExpense).subscribe({
       next: (data) => {

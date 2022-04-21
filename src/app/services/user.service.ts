@@ -47,4 +47,8 @@ export class UserService {
     this.userId = this.user.id;
     return this.http.post<User>(this.USER_API, newUser);
   }
+
+  getUserName(id: string) {
+    return this.http.get<User>(this.USER_API + '/' + id).subscribe((user) => user.username);
+  }
 }

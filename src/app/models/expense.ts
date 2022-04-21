@@ -7,6 +7,6 @@ export interface Expense {
 
   approval?: string;
   reimbursement?: number;
-  userId?: string;
+  userName?: string;
   id: string;
 }

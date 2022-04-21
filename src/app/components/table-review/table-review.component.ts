@@ -21,29 +21,29 @@ export class TableReviewComponent implements OnInit {
     public userServ: UserService
   ) {}
 
+@ViewChild(MatSort) sort!: MatSort;
+
+displayedColumns: string[] = [
+  'date',
+  'type',
+  'amount',
+  'hasReceipt',
+  'notes',
+];
+
   ngOnInit(): void {
     this.serv.getExpenses();
-    //this.userServ.userId = ;
+    this.matDataSource.sort = this.sort;
+    if (this.userServ.user?.type === 'admin') {
+      this.displayedColumns.unshift('userName');
+      this.displayedColumns.push('actions');
+    }
   }
 
-  displayedColumns: string[] = [
-    'date',
-    'type',
-    'amount',
-    'hasReceipt',
-    'notes',
-    'actions',
-  ];
 
   matDataSource = new MatTableDataSource<Expense>(this.serv.expenseList.value);
   dataSource = this.serv.expenseList;
   clickedRows = new Set<Expense>();
-
-  @ViewChild(MatSort) sort!: MatSort;
-
-  ngAfterViewInit() {
-    this.matDataSource.sort = this.sort;
-  }
 
   openDialog(action: any, obj: { action: any; }) {
     this.clickedRows.clear();
@@ -63,15 +63,10 @@ export class TableReviewComponent implements OnInit {
   }
 
   updateRowData(exp: Expense) {
-    // TO SUBSTITUTE WITH PUT REQUEST
-
-
-    // this.dataSource.value.filter((value, key) => {
-    //   if (value.id == row_obj.id) {
-    //     value.type = row_obj.type;
-    //   }
-    //   return true;
-    // });
+    this.serv.update(exp).subscribe({
+      next: () => this.serv.getExpenses(),
+      complete: () => this.clickedRows.clear(),
+    });
   }
 
   validate(exp: Expense) {
@@ -94,4 +89,6 @@ export class TableReviewComponent implements OnInit {
       complete: () => this.clickedRows.clear(),
     });
   }
+
+
 }

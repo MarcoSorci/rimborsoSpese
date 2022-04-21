@@ -74,4 +74,8 @@ export class ExpenseService {
   delete(id:string){
     return this.http.delete<any>(this.EXP_API + '/' + id);
   }
+
+  update(exp: Expense){
+    return this.http.put<any>(this.EXP_API + '/' + exp.id, exp)
+  }
 }

@@ -27,7 +27,6 @@ export class LoginComponent {
     if (spinner) {
       spinner.style.display = 'flex';
     }
-    
     this.serv
       .login(this.userModel.username, this.userModel.password)
       .subscribe({
