@@ -1,0 +1,31 @@
+.validation-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 25px;
+    margin: 10px 0px;
+}
+
+mat-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+mat-list-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+button {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+p {
+    text-align: center;
+}

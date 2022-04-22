@@ -32,7 +32,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { DialogBoxComponent } from './components/table-review/sub-components/dialog-box/dialog-box.component';
+import { ValidationListComponent } from './components/table-review/sub-components/validation-list/validation-list.component';
+import { ValidationDialogComponent } from './components/table-review/sub-components/validation-list/validation-dialog/validation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DialogBoxComponent } from './components/dialog-box/dialog-box.component
     ToolbarComponent,
     NavMenuComponent,
     RegisterComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    ValidationListComponent,
+    ValidationDialogComponent
   ],
   imports: [
     BrowserModule,

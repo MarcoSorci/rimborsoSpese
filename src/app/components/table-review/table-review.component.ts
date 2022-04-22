@@ -5,7 +5,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { DialogBoxComponent } from './sub-components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-table-review',
@@ -21,31 +21,36 @@ export class TableReviewComponent implements OnInit {
     public userServ: UserService
   ) {}
 
-@ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort!: MatSort;
 
-displayedColumns: string[] = [
-  'date',
-  'type',
-  'amount',
-  'hasReceipt',
-  'notes',
-];
+  displayedColumns: string[] = [
+    'date',
+    'type',
+    'amount',
+    'hasReceipt',
+    'notes',
+  ];
+
+  matDataSource = new MatTableDataSource<Expense>(this.serv.expenseList.value);
+  dataSource = this.serv.expenseList;
+  clickedRows = this.serv.clickedRows;
 
   ngOnInit(): void {
     this.serv.getExpenses();
     this.matDataSource.sort = this.sort;
-    if (this.userServ.user?.type === 'admin') {
-      this.displayedColumns.unshift('userName');
-      this.displayedColumns.push('actions');
-    }
+    // if (this.userServ.user?.type === 'admin') {
+    this.displayedColumns.unshift('userName');
+    this.displayedColumns.push('actions');
+    //  }
   }
 
+  openValidationPanel(exp: Expense) {
+    console.log(exp);
+    this.clickedRows.clear();
+    this.clickedRows.add(exp);
+  }
 
-  matDataSource = new MatTableDataSource<Expense>(this.serv.expenseList.value);
-  dataSource = this.serv.expenseList;
-  clickedRows = new Set<Expense>();
-
-  openDialog(action: any, obj: { action: any; }) {
+  openDialog(action: any, obj: { action: any }) {
     this.clickedRows.clear();
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {
@@ -69,18 +74,6 @@ displayedColumns: string[] = [
     });
   }
 
-  validate(exp: Expense) {
-    console.log(exp);
-
-    this.clickedRows.clear();
-    this.serv.validate(exp);
-    const res = document.getElementById('validation-result');
-    res?.setAttribute(
-      'id',
-      'validation-result' + Math.random().toString(16).slice(2)
-    );
-  }
-
   deleteRowData(exp: Expense) {
     console.log(exp);
 
@@ -89,6 +82,5 @@ displayedColumns: string[] = [
       complete: () => this.clickedRows.clear(),
     });
   }
-
-
+  
 }

@@ -6,6 +6,7 @@ import {
   MAT_NATIVE_DATE_FORMATS,
 } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { ExpTypes } from 'src/app/models/exp-types';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
@@ -21,10 +22,7 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
   },
 };
 
-export interface Types {
-  value: string;
-  viewValue: string;
-}
+
 
 @Component({
   selector: 'app-insert',
@@ -55,14 +53,14 @@ export class InsertComponent {
     id: '',
   };
 
-  expenseTypes: Types[] = [
+  expenseTypes: ExpTypes[] = [
     { value: 'transport', viewValue: 'Transport' },
     { value: 'lodging', viewValue: 'Lodging' },
     { value: 'food', viewValue: 'Food' },
     { value: 'other', viewValue: 'Other' },
   ];
 
-  receiptBool: Types[] = [
+  receiptBool: ExpTypes[] = [
     { value: 'true', viewValue: 'Yes' },
     { value: 'false', viewValue: 'No' },
   ];

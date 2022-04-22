@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User } from 'src/app/models/user';
+import { ExpTypes } from 'src/app/models/exp-types';
+import { Expense } from 'src/app/models/expense';
 
 @Component({
   selector: 'app-dialog-box',
@@ -11,10 +12,16 @@ export class DialogBoxComponent {
   action: string;
   local_data: any;
 
+  expenseTypes: ExpTypes[] = [
+    { value: 'transport', viewValue: 'Transport' },
+    { value: 'lodging', viewValue: 'Lodging' },
+    { value: 'food', viewValue: 'Food' },
+    { value: 'other', viewValue: 'Other' },
+  ];
+
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
-    //@Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: User
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Expense
   ) {
     console.log(data);
     this.local_data = { ...data };

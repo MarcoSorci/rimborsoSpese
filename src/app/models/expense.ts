@@ -9,4 +9,5 @@ export interface Expense {
   reimbursement?: number;
   userName?: string;
   id: string;
+  isManuallyValidated?: boolean;
 }

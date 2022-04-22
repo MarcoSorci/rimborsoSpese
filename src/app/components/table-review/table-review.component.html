@@ -53,7 +53,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row (click)="validate(row);  clickedRows.add(row)" [class.row-is-clicked]="clickedRows.has(row)"
+    <tr mat-row (click)="openValidationPanel(row)" [class.row-is-clicked]="clickedRows.has(row)"
         *matRowDef="let row; columns: displayedColumns;">
     </tr>
 </table>
@@ -62,38 +62,6 @@
     <button routerLink="/insert" mat-flat-button color="primary">Add New Request</button>
 </mat-card>
 
+<app-validation-list></app-validation-list>
 
 
-
-
-<mat-card class="validation-cont">
-    <h2>
-        Validation
-    </h2>
-
-    <div *ngIf="!clickedRows.size">
-        Click on an expense to check if it is valid.
-    </div>
-
-    <mat-list *ngFor="let clickedRow of clickedRows">
-        <mat-list-item>
-            <p mat-line>{{clickedRow.date | date:'MM/yyyy'}}</p>
-            <p mat-line>Type: {{clickedRow.type}}</p>
-            <p mat-line>Amount: {{"€ "+ clickedRow.amount + ".00"}}</p>
-        </mat-list-item>
-
-        <mat-list-item id="validation-result">
-            <p *ngIf="clickedRow.approval === 'full'">
-                <mat-icon>done</mat-icon> <br> Reimbursed amount: {{"€ "+ clickedRow.reimbursement + ".00"}}
-            </p>
-            <p *ngIf="clickedRow.approval === 'partial'">
-                <mat-icon>payments</mat-icon> <br> Partial reimbursement, reimbursed amount: {{"€ "+
-                clickedRow.reimbursement + ".00"}}
-            </p>
-            <p *ngIf="clickedRow.approval === 'denied'">
-                <mat-icon>close</mat-icon> <br> Sorry, this reimbursement can't go through.
-            </p>
-        </mat-list-item>
-    </mat-list>
-
-</mat-card>

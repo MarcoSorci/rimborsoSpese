@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Expense } from '../models/expense';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +12,19 @@ export class ExpenseService {
     'https://6248018d4bd12c92f4064156.mockapi.io/expenses';
 
   public expenseList = new BehaviorSubject<Expense[]>([]);
+  public clickedRows = new Set<Expense>();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient, private userServ: UserService) {}
 
   limitConfig = { transport: 20, lodging: 80, food: 30, other: 70 };
 
   getExpenses() {
     this.http
-      .get<Expense[]>(this.EXP_API)
+      .get<Expense[]>(
+        this.EXP_API /*+ this.userServ.user?.type !== 'admin'
+          ? '?userName=' + this.userServ.user?.username
+          : ''*/
+      )
       .subscribe((exp) => this.expenseList.next(exp));
   }
 
@@ -33,7 +38,7 @@ export class ExpenseService {
     this.expenseList.next(expArray);
   }
 
-  validate(exp: Expense) {
+  autoValidate(exp: Expense) {
     if (exp.hasReceipt === 'true') {
       if (exp.type === 'transport') {
         exp.reimbursement = this.checkReimbursement(
@@ -71,11 +76,11 @@ export class ExpenseService {
     }
   }
 
-  delete(id:string){
+  delete(id: string) {
     return this.http.delete<any>(this.EXP_API + '/' + id);
   }
 
-  update(exp: Expense){
-    return this.http.put<any>(this.EXP_API + '/' + exp.id, exp)
+  update(exp: Expense) {
+    return this.http.put<any>(this.EXP_API + '/' + exp.id, exp);
   }
 }
