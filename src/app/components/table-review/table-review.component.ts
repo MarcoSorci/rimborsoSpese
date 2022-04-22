@@ -38,10 +38,10 @@ export class TableReviewComponent implements OnInit {
   ngOnInit(): void {
     this.serv.getExpenses();
     this.matDataSource.sort = this.sort;
-    // if (this.userServ.user?.type === 'admin') {
-    this.displayedColumns.unshift('userName');
-    this.displayedColumns.push('actions');
-    //  }
+    if (this.userServ.user?.type === 'admin') {
+      this.displayedColumns.unshift('userName');
+      this.displayedColumns.push('actions');
+    }
   }
 
   openValidationPanel(exp: Expense) {
@@ -82,5 +82,4 @@ export class TableReviewComponent implements OnInit {
       complete: () => this.clickedRows.clear(),
     });
   }
-  
 }

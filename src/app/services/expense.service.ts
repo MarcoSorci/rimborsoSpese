@@ -19,13 +19,16 @@ export class ExpenseService {
   limitConfig = { transport: 20, lodging: 80, food: 30, other: 70 };
 
   getExpenses() {
-    this.http
-      .get<Expense[]>(
-        this.EXP_API /*+ this.userServ.user?.type !== 'admin'
-          ? '?userName=' + this.userServ.user?.username
-          : ''*/
-      )
-      .subscribe((exp) => this.expenseList.next(exp));
+    if (this.userServ.user?.type === 'admin') {
+      this.http.get<Expense[]>(this.EXP_API).subscribe((exp) => {
+        this.expenseList.next(exp);
+      });
+    } else
+      this.http
+        .get<Expense[]>(
+          this.EXP_API + '?userName=' + this.userServ.user?.username
+        )
+        .subscribe((exp) => this.expenseList.next(exp));
   }
 
   insert(newExpense: Expense) {
