@@ -2,7 +2,7 @@ table {
   width: 100%;
 }
 .mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid #e0e0e05d;
   border-top: 1px solid transparent;
   cursor: pointer;
 }
@@ -10,9 +10,9 @@ table {
   border-color: currentColor;
 }
 
-// .mat-column-userName{
-//   border-right: 1px solid currentColor;
-// }
+.mat-column-actions{
+  max-width: 40px;
+}
 
 // ul{
 //   list-style: none;

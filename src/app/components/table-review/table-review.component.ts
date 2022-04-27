@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
@@ -13,7 +13,6 @@ import { DialogBoxComponent } from './sub-components/dialog-box/dialog-box.compo
   styleUrls: ['./table-review.component.scss'],
 })
 export class TableReviewComponent implements OnInit {
-  @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
 
   constructor(
     public dialog: MatDialog,
@@ -75,8 +74,6 @@ export class TableReviewComponent implements OnInit {
   }
 
   deleteRowData(exp: Expense) {
-    console.log(exp);
-
     this.serv.delete(exp.id).subscribe({
       next: () => this.serv.getExpenses(),
       complete: () => this.clickedRows.clear(),

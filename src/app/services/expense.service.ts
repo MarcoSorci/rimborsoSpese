@@ -16,19 +16,14 @@ export class ExpenseService {
 
   constructor(private http: HttpClient, private userServ: UserService) {}
 
-  limitConfig = { transport: 20, lodging: 80, food: 30, other: 70 };
-
   getExpenses() {
+    let query = '';
     if (this.userServ.user?.type === 'admin') {
-      this.http.get<Expense[]>(this.EXP_API).subscribe((exp) => {
-        this.expenseList.next(exp);
-      });
-    } else
-      this.http
-        .get<Expense[]>(
-          this.EXP_API + '?userName=' + this.userServ.user?.username
-        )
-        .subscribe((exp) => this.expenseList.next(exp));
+       query = '';
+    } else {
+       query =  '?userName=' + this.userServ.user?.username;
+    }
+    this.http.get<Expense[]>(this.EXP_API + query).subscribe((exp) => this.expenseList.next(exp));
   }
 
   insert(newExpense: Expense) {
@@ -39,44 +34,6 @@ export class ExpenseService {
     let expArray = this.expenseList.value;
     expArray.push(exp);
     this.expenseList.next(expArray);
-  }
-
-  autoValidate(exp: Expense) {
-    if (exp.hasReceipt === 'true') {
-      if (exp.type === 'transport') {
-        exp.reimbursement = this.checkReimbursement(
-          this.limitConfig.transport,
-          exp
-        );
-      }
-      if (exp.type === 'lodging') {
-        exp.reimbursement = this.checkReimbursement(
-          this.limitConfig.lodging,
-          exp
-        );
-      }
-      if (exp.type === 'food') {
-        exp.reimbursement = this.checkReimbursement(this.limitConfig.food, exp);
-      }
-      if (exp.type === 'other') {
-        exp.reimbursement = this.checkReimbursement(
-          this.limitConfig.other,
-          exp
-        );
-      }
-    } else {
-      exp.approval = 'denied';
-    }
-  }
-
-  checkReimbursement(refValue: number, exp: Expense) {
-    if (refValue > exp.amount) {
-      exp.approval = 'full';
-      return exp.amount;
-    } else {
-      exp.approval = 'partial';
-      return refValue;
-    }
   }
 
   delete(id: string) {

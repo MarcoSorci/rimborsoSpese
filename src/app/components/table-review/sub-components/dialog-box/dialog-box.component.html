@@ -18,6 +18,10 @@
       <span matSuffix>.00</span>
     </mat-form-field>
 
+    <mat-form-field>
+      <input placeholder="Notes" matInput [(ngModel)]="local_data.notes">
+    </mat-form-field>
+
   </div>
   <ng-template #elseTemplate>
     Sure to delete <b>this expense?</b>

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
+import { ValidationService } from 'src/app/services/validation.service';
 import { ValidationDialogComponent } from './validation-dialog/validation-dialog.component';
 
 @Component({
@@ -14,7 +15,8 @@ export class ValidationListComponent implements AfterViewInit {
   constructor(
     public dialog: MatDialog,
     public serv: ExpenseService,
-    public userServ: UserService
+    public userServ: UserService,
+    public valServ: ValidationService
   ) {}
 
   clickedRows = this.serv.clickedRows;
@@ -25,7 +27,7 @@ export class ValidationListComponent implements AfterViewInit {
 
   checkValidation(exp: Expense) {
     if (!exp.isManuallyValidated) {
-      this.serv.autoValidate(exp);
+      this.valServ.autoValidate(exp);
     }
     const res = document.getElementById('validation-result');
     if (res) {
