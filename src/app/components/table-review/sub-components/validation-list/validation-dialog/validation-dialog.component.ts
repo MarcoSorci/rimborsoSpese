@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ExpTypes } from 'src/app/models/exp-types';
+import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 
 @Component({
@@ -19,7 +19,7 @@ export class ValidationDialogComponent {
     this.local_data = { ...data };
   }
 
-  validationTypes: ExpTypes[] = [
+  validationTypes: SelectOptions[] = [
     { value: 'full', viewValue: 'Full' },
     { value: 'partial', viewValue: 'Partial' },
     { value: 'denied', viewValue: 'Denied' },

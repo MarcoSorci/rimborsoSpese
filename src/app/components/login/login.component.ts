@@ -20,6 +20,7 @@ export class LoginComponent {
   userModel: User = {
     username: '',
     password: '',
+    id: '',
   };
 
   login() {

@@ -35,6 +35,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { DialogBoxComponent } from './components/table-review/sub-components/dialog-box/dialog-box.component';
 import { ValidationListComponent } from './components/table-review/sub-components/validation-list/validation-list.component';
 import { ValidationDialogComponent } from './components/table-review/sub-components/validation-list/validation-dialog/validation-dialog.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserlistDialogComponent } from './components/user-list/userlist-dialog/userlist-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { ValidationDialogComponent } from './components/table-review/sub-compone
     RegisterComponent,
     DialogBoxComponent,
     ValidationListComponent,
-    ValidationDialogComponent
+    ValidationDialogComponent,
+    UserListComponent,
+    UserlistDialogComponent
   ],
   imports: [
     BrowserModule,

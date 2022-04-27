@@ -1,4 +1,4 @@
-export interface ExpTypes {
+export interface SelectOptions {
     value: string;
     viewValue: string;
   }

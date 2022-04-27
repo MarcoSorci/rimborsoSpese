@@ -6,7 +6,7 @@ import {
   MAT_NATIVE_DATE_FORMATS,
 } from '@angular/material/core';
 import { Router } from '@angular/router';
-import { ExpTypes } from 'src/app/models/exp-types';
+import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
@@ -53,14 +53,14 @@ export class InsertComponent {
     id: '',
   };
 
-  expenseTypes: ExpTypes[] = [
+  expenseTypes: SelectOptions[] = [
     { value: 'transport', viewValue: 'Transport' },
     { value: 'lodging', viewValue: 'Lodging' },
     { value: 'food', viewValue: 'Food' },
     { value: 'other', viewValue: 'Other' },
   ];
 
-  receiptBool: ExpTypes[] = [
+  receiptBool: SelectOptions[] = [
     { value: 'true', viewValue: 'Yes' },
     { value: 'false', viewValue: 'No' },
   ];

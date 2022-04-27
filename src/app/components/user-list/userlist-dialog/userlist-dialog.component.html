@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+    <div *ngIf="action != 'Delete'; else elseTemplate">
+      <mat-form-field>
+        <input placeholder="Username" matInput [(ngModel)]="local_data.username" autocomplete="off">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-select placeholder="Type of User" matInput [(ngModel)]="local_data.type">
+          <mat-option *ngFor="let type of userRanks" [value]="type.value">{{type.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+    </div>
+    <ng-template #elseTemplate>
+      Sure to delete <b>this expense?</b>
+    </ng-template>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="doAction()">{{action}}</button>
+    <button mat-flat-button (click)="closeDialog()" color="warn">Cancel</button>
+  </div>

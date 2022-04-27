@@ -1,18 +1,22 @@
 import { Component, Inject, Optional } from '@angular/core';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ExpTypes } from 'src/app/models/exp-types';
+import { GRI_DATE_FORMATS } from 'src/app/components/insert/insert.component';
+import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 
 @Component({
   selector: 'app-dialog-box',
   templateUrl: './dialog-box.component.html',
   styleUrls: ['./dialog-box.component.scss'],
+  providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
+
 })
 export class DialogBoxComponent {
   action: string;
   local_data: any;
 
-  expenseTypes: ExpTypes[] = [
+  expenseTypes: SelectOptions[] = [
     { value: 'transport', viewValue: 'Transport' },
     { value: 'lodging', viewValue: 'Lodging' },
     { value: 'food', viewValue: 'Food' },

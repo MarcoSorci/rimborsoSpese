@@ -1,2 +1,3 @@
-<button *ngIf="serv.isAuth" routerLink="insert" mat-flat-button color="primary">Insert</button>
-<button *ngIf="serv.isAuth" routerLink="table" mat-flat-button color="primary">Review Table</button>
+<button *ngIf="serv.isAuth" routerLink="insert" mat-flat-button color="primary">Insert Request</button>
+<button *ngIf="serv.isAuth" routerLink="table" mat-flat-button color="primary">Review Requests</button>
+<button *ngIf="serv.user?.type === 'admin'" routerLink="userlist" mat-flat-button color="primary">User List</button>

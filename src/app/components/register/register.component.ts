@@ -7,12 +7,15 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   usernameVal = new FormControl('', [Validators.required]);
   passwordVal = new FormControl('', [Validators.required]);
-  adminPinVal = new FormControl('', [Validators.required, Validators.maxLength(4)]);
+  adminPinVal = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(4),
+  ]);
 
   constructor(public serv: UserService, private router: Router) {}
 
@@ -20,6 +23,7 @@ export class RegisterComponent {
     username: '',
     password: '',
     type: '',
+    id: '',
   };
 
   registerEmployee(newUser: User) {

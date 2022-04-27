@@ -24,7 +24,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Admin Access Pin</mat-label>
-        <input [formControl]="adminPinVal" matInput type="number" class="admin-access" maxlength="4">
+        <input [formControl]="adminPinVal" matInput type="number" class="admin-access" maxlength="4" autocomplete="off">
     </mat-form-field>
 
     <button type="submit" (click)="registerAdmin(userModel)" [disabled]="usernameVal.invalid || passwordVal.invalid || adminPinVal.value != '1234'"

@@ -20,7 +20,7 @@ export class UserService {
   public userId? = '';
 
   login(username: string, psw: string) {
-   return this.http.get<User[]>(this.USER_API + '?username=' + username).pipe(
+    return this.http.get<User[]>(this.USER_API + '?username=' + username).pipe(
       map((users: User[]) => {
         const user = users.find(
           (u) => u.username === username && u.password === psw
@@ -32,7 +32,7 @@ export class UserService {
         }
         return user;
       })
-    )
+    );
   }
 
   logout() {
@@ -42,13 +42,25 @@ export class UserService {
   }
 
   register(newUser: User) {
-    this.isAuth = true;
-    this.user = newUser;
-    this.userId = this.user.id;
+    if (!this.isAuth) {
+      this.isAuth = true;
+      this.user = newUser;
+      this.userId = this.user.id;
+    }
     return this.http.post<User>(this.USER_API, newUser);
   }
 
-  getUserName(id: string) {
-    return this.http.get<User>(this.USER_API + '/' + id).subscribe((user) => user.username);
+  getUserList() {
+    return this.http
+      .get<User[]>(this.USER_API)
+      .subscribe((user) => this.userList.next(user));
+  }
+
+  delete(id: string) {
+    return this.http.delete<any>(this.USER_API + '/' + id);
+  }
+
+  update(usr: User) {
+    return this.http.put<any>(this.USER_API + '/' + usr.id, usr);
   }
 }
