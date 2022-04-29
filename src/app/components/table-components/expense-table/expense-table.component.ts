@@ -46,24 +46,25 @@ export class ExpenseTableComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
-    // const data = this.dataSource.slice();
-    // this.dataSource = data.sort((a, b) => {
-    //   const isAsc = sort.direction === 'asc';
-    //   switch (sort.active) {
-    //     case 'date':
-    //       return this.compare(a.date, b.date, isAsc);
-    //     case 'type':
-    //       return this.compare(a.type, b.type, isAsc);
-    //     case 'amount':
-    //       return this.compare(a.amount, b.amount, isAsc);
-    //     case 'hasReceipt':
-    //       return this.compare(a.hasReceipt, b.hasReceipt, isAsc);
-    //     case 'userName':
-    //       return this.compare(a.userName, b.userName, isAsc);
-    //     default:
-    //       return 0;
-    //   }
-    // });
+    const data = this.dataSource.value.slice();
+    data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date':
+          return this.compare(a.date, b.date, isAsc);
+        case 'type':
+          return this.compare(a.type, b.type, isAsc);
+        case 'amount':
+          return this.compare(a.amount, b.amount, isAsc);
+        case 'hasReceipt':
+          return this.compare(a.hasReceipt, b.hasReceipt, isAsc);
+        case 'userName':
+          return this.compare(a.userName, b.userName, isAsc);
+        default:
+          return 0;
+      }
+    });
+    this.dataSource.next(data);
   }
 
   compare(a: number | string, b: number | string, isAsc: boolean) {
