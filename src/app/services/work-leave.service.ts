@@ -21,6 +21,7 @@ export class WorkLeaveService {
     hours: '',
     type: '',
     notes: '',
+    approval: '',
   };
 
   getWorkLeaves() {

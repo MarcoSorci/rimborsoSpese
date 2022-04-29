@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableReviewComponent } from './table-review.component';
+import { ExpInsertComponent } from './exp-insert.component';
 
-describe('TableReviewComponent', () => {
-  let component: TableReviewComponent;
-  let fixture: ComponentFixture<TableReviewComponent>;
+describe('ExpInsertComponent', () => {
+  let component: ExpInsertComponent;
+  let fixture: ComponentFixture<ExpInsertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableReviewComponent ]
+      declarations: [ ExpInsertComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableReviewComponent);
+    fixture = TestBed.createComponent(ExpInsertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

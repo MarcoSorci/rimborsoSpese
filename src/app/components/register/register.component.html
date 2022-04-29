@@ -2,23 +2,23 @@
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
         <input #usernameVal="ngModel" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
+        <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
+            Username is mandatory.
+        </mat-error>
     </mat-form-field>
 
-    <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
-        Username is mandatory.
-    </mat-error>
 
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input #passwordVal="ngModel" matInput type="password" [(ngModel)]="userModel.password" required>
+        <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">
+            Password is mandatory.
+        </mat-error>
     </mat-form-field>
 
-    <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">
-        Password is mandatory.
-    </mat-error>
 
-    <button style="margin-bottom: 20px;" type="submit" (click)="registerEmployee(userModel)" [disabled]="usernameVal.invalid || passwordVal.invalid"
-        mat-flat-button color="primary">Register <br> Employee
+    <button style="margin-bottom: 20px;" type="submit" (click)="registerEmployee(userModel)"
+        [disabled]="usernameVal.invalid || passwordVal.invalid" mat-flat-button color="primary">Register <br> Employee
     </button>
 
 
@@ -27,8 +27,9 @@
         <input #adminPinVal matInput type="number" class="admin-access" maxlength="4" autocomplete="off">
     </mat-form-field>
 
-    <button type="submit" (click)="registerAdmin(userModel)" [disabled]="usernameVal.invalid || passwordVal.invalid || adminPinVal.value != '1234'"
-        mat-flat-button color="primary">Register <br> Admin
+    <button type="submit" (click)="registerAdmin(userModel)"
+        [disabled]="usernameVal.invalid || passwordVal.invalid || adminPinVal.value != '1234'" mat-flat-button
+        color="primary">Register <br> Admin
     </button>
 
 </div>

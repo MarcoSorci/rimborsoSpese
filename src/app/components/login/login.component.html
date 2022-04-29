@@ -7,8 +7,6 @@
         </mat-error>
     </mat-form-field>
 
-
-
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input #passwordVal="ngModel" matInput type="password" [(ngModel)]="userModel.password" required>
@@ -16,8 +14,6 @@
             Password is mandatory.
         </mat-error>
     </mat-form-field>
-
-
 
     <button type="submit" (click)="login()" [disabled]="usernameVal.invalid || passwordVal.invalid" mat-flat-button
         color="primary">Login

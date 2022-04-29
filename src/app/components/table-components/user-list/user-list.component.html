@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" #mytable matSort class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> User Name </th>

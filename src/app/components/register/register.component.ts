@@ -13,12 +13,7 @@ export class RegisterComponent {
 
   constructor(public serv: UserService, private router: Router) {}
 
-  userModel: User = {
-    username: '',
-    password: '',
-    type: '',
-    id: '',
-  };
+  userModel = this.serv.userModel; 
 
   registerEmployee(newUser: User) {
     const spinner = document.getElementById('spinner-overlay');

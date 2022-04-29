@@ -6,33 +6,29 @@
         <mat-hint>MM/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="false"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker startView="year" [disabled]="false"></mat-datepicker>
+        <mat-error *ngIf="dateVal.invalid && dateVal.touched">
+            Field is mandatory.
+        </mat-error>
     </mat-form-field>
-
-    <mat-error *ngIf="dateVal.invalid && dateVal.touched">
-        Field is mandatory.
-    </mat-error>
 
     <mat-form-field appearance="fill">
         <mat-label>Hours of Leave</mat-label>
-        <input #hoursVal="ngModel" required matInput [(ngModel)]="leaveModel.hours"
-            autocomplete="off">
+        <input #hoursVal="ngModel" required matInput [(ngModel)]="leaveModel.hours" autocomplete="off">
+        <mat-error *ngIf="hoursVal.invalid && hoursVal.touched">
+            Field is mandatory.
+        </mat-error>
     </mat-form-field>
-
-    <mat-error *ngIf="hoursVal.invalid && hoursVal.touched">
-        Field is mandatory.
-    </mat-error>
-
 
     <mat-form-field appearance="fill">
         <mat-label>Motivation for Leave</mat-label>
         <mat-select #typeVal="ngModel" required [(ngModel)]="leaveModel.type">
             <mat-option *ngFor="let type of leaveTypes" [value]="type.value">{{type.viewValue}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="typeVal.invalid && typeVal.touched">
+            Field is mandatory.
+        </mat-error>
     </mat-form-field>
 
-    <mat-error *ngIf="typeVal.invalid && typeVal.touched">
-        Field is mandatory.
-    </mat-error>
 
     <mat-form-field appearance="fill">
         <mat-label>Notes</mat-label>
@@ -40,6 +36,5 @@
     </mat-form-field>
 
     <button (click)="insert(leaveModel)" [disabled]="dateVal.invalid || typeVal.invalid || hoursVal.invalid"
-    mat-flat-button color="primary">Send Request</button>
+        mat-flat-button color="primary">Send Request</button>
 </div>
-

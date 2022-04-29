@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import {
   MatDateFormats,
   MAT_DATE_FORMATS,
@@ -25,12 +24,12 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
 
 
 @Component({
-  selector: 'app-insert',
-  templateUrl: './insert.component.html',
-  styleUrls: ['./insert.component.scss'],
+  selector: 'app-exp-insert',
+  templateUrl: './exp-insert.component.html',
+  styleUrls: ['./exp-insert.component.scss'],
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 })
-export class InsertComponent {
+export class ExpInsertComponent {
 
   constructor(
     public serv: ExpenseService,
@@ -45,6 +44,7 @@ export class InsertComponent {
     hasReceipt: '',
     notes: '',
     id: '',
+    userName: '',
   };
 
   expenseTypes: SelectOptions[] = [
@@ -60,7 +60,9 @@ export class InsertComponent {
   ];
 
   insert(newExpense: Expense) {
-    newExpense.userName = this.userServ.user?.username;
+    if (this.userServ.user) {
+      newExpense.userName = this.userServ.user?.username;
+    }
     newExpense.userId = this.userServ.user?.id;
     newExpense = this.expenseModel;
     this.serv.insert(newExpense).subscribe({

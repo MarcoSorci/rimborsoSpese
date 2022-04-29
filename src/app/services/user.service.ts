@@ -15,6 +15,13 @@ export class UserService {
 
   constructor(private router: Router, private http: HttpClient) {}
 
+  userModel: User = {
+    username: '',
+    password: '',
+    type: '',
+    id: '',
+  };
+
   public user?: User;
   public isAuth = false;
   public userId? = '';

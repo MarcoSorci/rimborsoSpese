@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { UserlistDialogComponent } from '../dialog-components/userlist-dialog/userlist-dialog.component';
+import { UserlistDialogComponent } from '../../dialog-components/userlist-dialog/userlist-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -11,17 +12,38 @@ import { UserlistDialogComponent } from '../dialog-components/userlist-dialog/us
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  constructor(public dialog: MatDialog, public serv: UserService) {}
-
   displayedColumns: string[] = ['username', 'type', 'actions'];
 
-  matDataSource = new MatTableDataSource<User>(this.serv.userList.value);
+  // matdataSource = new MatTableDataSource<User>(this.serv.userList.value);
   dataSource = this.serv.userList;
+  constructor(public dialog: MatDialog, public serv: UserService) {}
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
-   if (this.serv.user?.type === 'admin') {
+    if (this.serv.user?.type === 'admin') {
       this.serv.getUserList();
-   }
+    }
+    //this.matdataSource.sort = this.sort;
+  }
+
+  sortData(sort: Sort) {
+    // const data = this.dataSource.slice();
+    // this.dataSource = data.sort((a, b) => {
+    //   const isAsc = sort.direction === 'asc';
+    //   switch (sort.active) {
+    //     case 'username':
+    //       return this.compare(a.username, b.username, isAsc);
+    //     case 'type':
+    //       return this.compare(a.type, b.type, isAsc);
+    //     default:
+    //       return 0;
+    //   }
+    // });
+  }
+
+  compare(a: string, b: string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   openDialog(action: any, obj: { action: any }) {
@@ -42,13 +64,13 @@ export class UserListComponent implements OnInit {
 
   updateRowData(user: User) {
     this.serv.update(user).subscribe({
-      next: () => this.serv.getUserList()
+      next: () => this.serv.getUserList(),
     });
   }
 
   deleteRowData(user: User) {
     this.serv.delete(user.id).subscribe({
-      next: () => this.serv.getUserList()
+      next: () => this.serv.getUserList(),
     });
   }
 }

@@ -7,5 +7,5 @@ export interface WorkLeave {
 
   userName?: string;
   userId?: string;
-  approval?: string;
+  approval: string;
 }

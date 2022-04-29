@@ -15,11 +15,7 @@ export class LoginComponent {
   constructor(public serv: UserService, private router: Router,
     private snack: MatSnackBar) {}
 
-  userModel: User = {
-    username: '',
-    password: '',
-    id: '',
-  };
+  userModel = this.serv.userModel; 
 
   login() {
     const spinner = document.getElementById('spinner-overlay');

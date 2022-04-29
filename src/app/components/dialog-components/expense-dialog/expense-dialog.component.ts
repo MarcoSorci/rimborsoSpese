@@ -1,10 +1,10 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GRI_DATE_FORMATS } from 'src/app/components/insert/insert.component';
 import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 import { UserService } from 'src/app/services/user.service';
+import { GRI_DATE_FORMATS } from '../../insert-components/exp-insert/exp-insert.component';
 
 @Component({
   selector: 'app-expense-dialog',
@@ -41,6 +41,9 @@ export class ExpenseDialogComponent {
   }
 
   doAction() {
+    if (this.local_data.approval !== this.data.approval || this.local_data.reimbursement !== this.data.reimbursement) {
+      this.local_data.isManuallyValidated = true;
+    }
     this.dialogRef.close({ event: this.action, data: this.local_data });
   }
 

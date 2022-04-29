@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" #mytable matSort class="mat-elevation-z8">
+<table mat-table #expTable [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="mat-elevation-z8">
 
     <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Pertinent Month </th>
@@ -48,7 +48,7 @@
     </ng-container>
 
     <ng-container matColumnDef="userName">
-        <th mat-header-cell *matHeaderCellDef> Requester Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Requester Name </th>
         <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
     </ng-container>
 
