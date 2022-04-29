@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValidationDialogComponent } from './validation-dialog.component';
+import { WorkLeaveTableComponent } from './work-leave-table.component';
 
-describe('ValidationDialogComponent', () => {
-  let component: ValidationDialogComponent;
-  let fixture: ComponentFixture<ValidationDialogComponent>;
+describe('WorkLeaveTableComponent', () => {
+  let component: WorkLeaveTableComponent;
+  let fixture: ComponentFixture<WorkLeaveTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValidationDialogComponent ]
+      declarations: [ WorkLeaveTableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ValidationDialogComponent);
+    fixture = TestBed.createComponent(WorkLeaveTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TableReviewComponent } from './components/table-review/table-review.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { WorkLeaveTableComponent } from './components/work-leave-table/work-leave-table.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'insert', component: InsertComponent, /*canActivate: [AuthGuard]*/ },
   { path: 'table', component: TableReviewComponent, /*canActivate: [AuthGuard]*/ },
   { path: 'userlist', component: UserListComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'wl-table', component: WorkLeaveTableComponent, /*canActivate: [AuthGuard]*/ },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

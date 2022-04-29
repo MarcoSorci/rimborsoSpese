@@ -31,18 +31,12 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 })
 export class InsertComponent {
-  dateVal = new FormControl('', [Validators.required]);
-  typeVal = new FormControl('', [Validators.required]);
-  amountVal = new FormControl('', [Validators.required, Validators.min(1)]);
-  receiptVal = new FormControl('', [Validators.required]);
 
   constructor(
     public serv: ExpenseService,
     public userServ: UserService,
     public router: Router
   ) {}
-
-  selected = '';
 
   expenseModel: Expense = {
     date: '',

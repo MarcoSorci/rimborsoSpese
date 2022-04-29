@@ -1,7 +1,7 @@
 <div id="container">
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input [formControl]="usernameVal" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
+        <input #usernameVal="ngModel" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
     </mat-form-field>
 
     <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
@@ -10,7 +10,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input [formControl]="passwordVal" matInput type="password" [(ngModel)]="userModel.password" required>
+        <input #passwordVal="ngModel" matInput type="password" [(ngModel)]="userModel.password" required>
     </mat-form-field>
 
     <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">

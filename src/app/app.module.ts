@@ -32,11 +32,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { DialogBoxComponent } from './components/table-review/sub-components/dialog-box/dialog-box.component';
-import { ValidationListComponent } from './components/table-review/sub-components/validation-list/validation-list.component';
-import { ValidationDialogComponent } from './components/table-review/sub-components/validation-list/validation-dialog/validation-dialog.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { ValidationListComponent } from './components/table-review/validation-list/validation-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserlistDialogComponent } from './components/user-list/userlist-dialog/userlist-dialog.component';
+import { WorkLeaveTableComponent } from './components/work-leave-table/work-leave-table.component';
+import { WlDialogComponent } from './components/work-leave-table/wl-dialog/wl-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,9 +50,10 @@ import { UserlistDialogComponent } from './components/user-list/userlist-dialog/
     RegisterComponent,
     DialogBoxComponent,
     ValidationListComponent,
-    ValidationDialogComponent,
     UserListComponent,
-    UserlistDialogComponent
+    UserlistDialogComponent,
+    WorkLeaveTableComponent,
+    WlDialogComponent
   ],
   imports: [
     BrowserModule,

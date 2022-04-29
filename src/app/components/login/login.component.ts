@@ -11,8 +11,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  usernameVal = new FormControl('', [Validators.required]);
-  passwordVal = new FormControl('', [Validators.required]);
 
   constructor(public serv: UserService, private router: Router,
     private snack: MatSnackBar) {}

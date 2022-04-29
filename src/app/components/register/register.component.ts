@@ -10,12 +10,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  usernameVal = new FormControl('', [Validators.required]);
-  passwordVal = new FormControl('', [Validators.required]);
-  adminPinVal = new FormControl('', [
-    Validators.required,
-    Validators.maxLength(4),
-  ]);
 
   constructor(public serv: UserService, private router: Router) {}
 

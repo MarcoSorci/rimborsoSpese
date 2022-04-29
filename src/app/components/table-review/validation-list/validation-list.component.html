@@ -15,10 +15,8 @@
         </mat-list-item>
 
         <mat-list-item>
-            <button *ngIf="userServ.user?.type !== 'admin'" (click)="checkValidation(clickedRow)" mat-flat-button
+            <button (click)="checkValidation(clickedRow)" mat-flat-button
                 color="accent">Check Validation</button>
-            <button *ngIf="userServ.user?.type === 'admin'" (click)="openDialog(clickedRow)" mat-flat-button
-                color="warn">Set Validation</button>
         </mat-list-item>
 
         <mat-list-item id="validation-result" style="display: none;">

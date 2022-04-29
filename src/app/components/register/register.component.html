@@ -1,7 +1,7 @@
 <div id="container">
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input [formControl]="usernameVal" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
+        <input #usernameVal="ngModel" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
     </mat-form-field>
 
     <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
@@ -10,7 +10,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input [formControl]="passwordVal" matInput type="password" [(ngModel)]="userModel.password" required>
+        <input #passwordVal="ngModel" matInput type="password" [(ngModel)]="userModel.password" required>
     </mat-form-field>
 
     <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">
@@ -24,7 +24,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Admin Access Pin</mat-label>
-        <input [formControl]="adminPinVal" matInput type="number" class="admin-access" maxlength="4" autocomplete="off">
+        <input #adminPinVal matInput type="number" class="admin-access" maxlength="4" autocomplete="off">
     </mat-form-field>
 
     <button type="submit" (click)="registerAdmin(userModel)" [disabled]="usernameVal.invalid || passwordVal.invalid || adminPinVal.value != '1234'"

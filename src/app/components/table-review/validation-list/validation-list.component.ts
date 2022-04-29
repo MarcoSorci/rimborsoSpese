@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Expense } from 'src/app/models/expense';
+import { DialogService } from 'src/app/services/dialog.service';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
 import { ValidationService } from 'src/app/services/validation.service';
-import { ValidationDialogComponent } from './validation-dialog/validation-dialog.component';
+import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-validation-list',
@@ -16,7 +17,8 @@ export class ValidationListComponent implements AfterViewInit {
     public dialog: MatDialog,
     public serv: ExpenseService,
     public userServ: UserService,
-    public valServ: ValidationService
+    public valServ: ValidationService,
+    public dialogServ: DialogService
   ) {}
 
   clickedRows = this.serv.clickedRows;
@@ -39,22 +41,5 @@ export class ValidationListComponent implements AfterViewInit {
     }
   }
 
-  openDialog(exp: Expense) {
-    this.clickedRows.clear();
-    const dialogRef = this.dialog.open(ValidationDialogComponent, {
-      width: '250px',
-      data: exp,
-    });
 
-    dialogRef
-      .afterClosed()
-      .subscribe((result) => this.updateRowData(result.data));
-  }
-
-  updateRowData(exp: Expense) {
-    this.serv.update(exp).subscribe({
-      next: () => this.serv.getExpenses(),
-      complete: () => this.clickedRows.clear(),
-    });
-  }
 }

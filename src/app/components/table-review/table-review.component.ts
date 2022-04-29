@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Expense } from 'src/app/models/expense';
+import { DialogService } from 'src/app/services/dialog.service';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
-import { DialogBoxComponent } from './sub-components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-table-review',
@@ -17,7 +17,8 @@ export class TableReviewComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public serv: ExpenseService,
-    public userServ: UserService
+    public userServ: UserService,
+    public dialogServ: DialogService
   ) {}
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -49,34 +50,4 @@ export class TableReviewComponent implements OnInit {
     this.clickedRows.add(exp);
   }
 
-  openDialog(action: any, obj: { action: any }) {
-    this.clickedRows.clear();
-    obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '250px',
-      data: obj,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result.event == 'Update') {
-        this.updateRowData(result.data);
-      } else if (result.event == 'Delete') {
-        this.deleteRowData(result.data);
-      }
-    });
-  }
-
-  updateRowData(exp: Expense) {
-    this.serv.update(exp).subscribe({
-      next: () => this.serv.getExpenses(),
-      complete: () => this.clickedRows.clear(),
-    });
-  }
-
-  deleteRowData(exp: Expense) {
-    this.serv.delete(exp.id).subscribe({
-      next: () => this.serv.getExpenses(),
-      complete: () => this.clickedRows.clear(),
-    });
-  }
 }
