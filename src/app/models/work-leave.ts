@@ -6,5 +6,6 @@ export interface WorkLeave {
   notes?: string;
 
   userName?: string;
+  userId?: string;
   approval?: string;
 }

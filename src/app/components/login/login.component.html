@@ -2,20 +2,22 @@
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
         <input #usernameVal="ngModel" matInput [(ngModel)]="userModel.username" autocomplete="off" required>
+        <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
+            Username is mandatory.
+        </mat-error>
     </mat-form-field>
 
-    <mat-error *ngIf="usernameVal.invalid && usernameVal.touched">
-        Username is mandatory.
-    </mat-error>
+
 
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input #passwordVal="ngModel" matInput type="password" [(ngModel)]="userModel.password" required>
+        <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">
+            Password is mandatory.
+        </mat-error>
     </mat-form-field>
 
-    <mat-error *ngIf="passwordVal.invalid && passwordVal.touched">
-        Password is mandatory.
-    </mat-error>
+
 
     <button type="submit" (click)="login()" [disabled]="usernameVal.invalid || passwordVal.invalid" mat-flat-button
         color="primary">Login

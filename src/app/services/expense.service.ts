@@ -18,12 +18,12 @@ export class ExpenseService {
 
   getExpenses() {
     let query = '';
-    if (this.userServ.user?.type === 'admin') {
-       query = '';
-    } else {
-       query =  '?userName=' + this.userServ.user?.username;
+    if (this.userServ.user?.type !== 'admin') {
+      query = '?userId=' + this.userServ.user?.id;
     }
-    this.http.get<Expense[]>(this.EXP_API + query).subscribe((exp) => this.expenseList.next(exp));
+    this.http
+      .get<Expense[]>(this.EXP_API + query)
+      .subscribe((exp) => this.expenseList.next(exp));
   }
 
   insert(newExpense: Expense) {

@@ -61,6 +61,7 @@ export class InsertComponent {
 
   insert(newExpense: Expense) {
     newExpense.userName = this.userServ.user?.username;
+    newExpense.userId = this.userServ.user?.id;
     newExpense = this.expenseModel;
     this.serv.insert(newExpense).subscribe({
       next: (data) => {

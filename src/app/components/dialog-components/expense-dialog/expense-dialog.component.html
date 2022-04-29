@@ -1,0 +1,50 @@
+<div mat-dialog-content>
+
+    <div *ngIf="action != 'Delete';else elseTemplate">
+      <mat-form-field>
+        <input placeholder="Date" matInput [matDatepicker]="picker" [(ngModel)]="local_data.date" autocomplete="off">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker startView="year"></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-select placeholder="Type of Expense" matInput [(ngModel)]="local_data.type">
+          <mat-option *ngFor="let type of expenseTypes" [value]="type.value">{{type.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input placeholder="Amount" class="right-align" matInput type="number" [(ngModel)]="local_data.amount">
+        <span matPrefix>€&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input placeholder="Notes" matInput [(ngModel)]="local_data.notes">
+      </mat-form-field>
+  
+      <mat-form-field *ngIf="this.userServ.user?.type === 'admin'">
+        <mat-select placeholder="Approval Type" matInput [(ngModel)]="local_data.approval">
+          <mat-option *ngFor="let type of validationTypes" [value]="type.value">{{type.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field *ngIf="this.userServ.user?.type === 'admin' && local_data.approval !== 'denied'">
+        <input placeholder="Reimbursed Amount" class="right-align" matInput type="number"
+          [(ngModel)]="local_data.reimbursement">
+        <span matPrefix>€&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+  
+    </div>
+  
+  
+    <ng-template #elseTemplate>
+      Sure to delete <b>this request?</b>
+    </ng-template>
+  
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="doAction()">{{action}}</button>
+    <button mat-flat-button (click)="closeDialog()" color="warn">Cancel</button>
+  </div>

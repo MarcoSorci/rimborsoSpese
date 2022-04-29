@@ -32,12 +32,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+
 import { ValidationListComponent } from './components/table-review/validation-list/validation-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { UserlistDialogComponent } from './components/user-list/userlist-dialog/userlist-dialog.component';
+import { UserlistDialogComponent } from './components/dialog-components/userlist-dialog/userlist-dialog.component';
 import { WorkLeaveTableComponent } from './components/work-leave-table/work-leave-table.component';
-import { WlDialogComponent } from './components/work-leave-table/wl-dialog/wl-dialog.component';
+import { WlInsertComponent } from './components/work-leave-table/wl-insert/wl-insert.component';
+import { ExpenseDialogComponent } from './components/dialog-components/expense-dialog/expense-dialog.component';
+import { WlDialogComponent } from './components/dialog-components/wl-dialog/wl-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,11 +50,12 @@ import { WlDialogComponent } from './components/work-leave-table/wl-dialog/wl-di
     ToolbarComponent,
     NavMenuComponent,
     RegisterComponent,
-    DialogBoxComponent,
     ValidationListComponent,
     UserListComponent,
     UserlistDialogComponent,
     WorkLeaveTableComponent,
+    WlInsertComponent,
+    ExpenseDialogComponent,
     WlDialogComponent
   ],
   imports: [

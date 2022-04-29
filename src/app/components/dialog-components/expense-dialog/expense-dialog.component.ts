@@ -7,13 +7,13 @@ import { Expense } from 'src/app/models/expense';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-dialog-box',
-  templateUrl: './dialog-box.component.html',
-  styleUrls: ['./dialog-box.component.scss'],
+  selector: 'app-expense-dialog',
+  templateUrl: './expense-dialog.component.html',
+  styleUrls: ['./expense-dialog.component.scss'],
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 
 })
-export class DialogBoxComponent {
+export class ExpenseDialogComponent {
   action: string;
   local_data: any;
 
@@ -31,7 +31,7 @@ export class DialogBoxComponent {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<DialogBoxComponent>,
+    public dialogRef: MatDialogRef<ExpenseDialogComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Expense,
     public userServ: UserService,
   ) {

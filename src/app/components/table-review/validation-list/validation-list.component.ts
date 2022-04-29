@@ -5,7 +5,6 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
 import { ValidationService } from 'src/app/services/validation.service';
-import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-validation-list',

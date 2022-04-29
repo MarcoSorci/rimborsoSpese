@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogBoxComponent } from './dialog-box.component';
+import { WlInsertComponent } from './wl-insert.component';
 
-describe('DialogBoxComponent', () => {
-  let component: DialogBoxComponent;
-  let fixture: ComponentFixture<DialogBoxComponent>;
+describe('WlInsertComponent', () => {
+  let component: WlInsertComponent;
+  let fixture: ComponentFixture<WlInsertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogBoxComponent ]
+      declarations: [ WlInsertComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogBoxComponent);
+    fixture = TestBed.createComponent(WlInsertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

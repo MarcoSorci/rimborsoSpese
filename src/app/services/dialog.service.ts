@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogBoxComponent } from '../components/dialog-box/dialog-box.component';
+import { ExpenseDialogComponent } from '../components/dialog-components/expense-dialog/expense-dialog.component';
+import { WlDialogComponent } from '../components/dialog-components/wl-dialog/wl-dialog.component';
 import { Expense } from '../models/expense';
+import { WorkLeave } from '../models/work-leave';
 import { ExpenseService } from './expense.service';
+import { WorkLeaveService } from './work-leave.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,7 @@ export class DialogService {
   constructor(
     public dialog: MatDialog,
     public serv: ExpenseService,
+    public wlServ: WorkLeaveService
   ) { }
 
   clickedRows = this.serv.clickedRows;
@@ -19,31 +23,59 @@ export class DialogService {
   openDialog(action: any, obj: any) {
     this.clickedRows.clear();
     obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
+    const dialogRef = this.dialog.open(ExpenseDialogComponent, {
       width: '250px',
       data: obj,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event == 'Update') {
-        this.updateRowData(result.data);
+        this.updateExpData(result.data);
       } else if (result.event == 'Delete') {
-        this.deleteRowData(result.data);
+        this.deleteExpData(result.data);
       }
     });
   }
 
-  updateRowData(exp: Expense) {
+  updateExpData(exp: Expense) {
     this.serv.update(exp).subscribe({
       next: () => this.serv.getExpenses(),
       complete: () => this.clickedRows.clear(),
     });
   }
 
-  deleteRowData(exp: Expense) {
+  deleteExpData(exp: Expense) {
     this.serv.delete(exp.id).subscribe({
       next: () => this.serv.getExpenses(),
       complete: () => this.clickedRows.clear(),
+    });
+  }
+
+  openWorkLeaveDialog(action: any, obj: any) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(WlDialogComponent, {
+      width: '250px',
+      data: obj,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.event == 'Update') {
+        this.updateWLData(result.data);
+      } else if (result.event == 'Delete') {
+        this.deleteWLData(result.data);
+      }
+    });
+  }
+
+  updateWLData(wl: WorkLeave) {
+    this.wlServ.update(wl).subscribe({
+      next: () => this.wlServ.getWorkLeaves(),
+    });
+  }
+
+  deleteWLData(wl: WorkLeave) {
+    this.wlServ.delete(wl.id).subscribe({
+      next: () => this.wlServ.getWorkLeaves(),
     });
   }
 

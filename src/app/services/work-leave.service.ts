@@ -25,10 +25,8 @@ export class WorkLeaveService {
 
   getWorkLeaves() {
     let query = '';
-    if (this.userServ.user?.type === 'admin') {
-      query = '';
-    } else {
-      query = '?userName=' + this.userServ.user?.username;
+    if (this.userServ.user?.type !== 'admin') {
+      query = '?userId=' + this.userServ.user?.id;
     }
     this.http
       .get<WorkLeave[]>(this.WORK_LEAVE_API + query)

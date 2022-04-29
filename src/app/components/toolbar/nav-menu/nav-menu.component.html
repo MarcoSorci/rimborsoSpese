@@ -1,3 +1,8 @@
-<button *ngIf="serv.isAuth" routerLink="table" mat-flat-button color="primary">Reimbursement</button>
-<button *ngIf="serv.isAuth" routerLink="wl-table" mat-flat-button color="primary">Work Leave</button>
-<button *ngIf="serv.user?.type === 'admin'" routerLink="userlist" mat-flat-button color="primary">User List</button>
+<mat-button-toggle-group appearance="legacy" class="mat-elevation-z">
+    <mat-button-toggle *ngIf="serv.isAuth" routerLink="table" mat-flat-button color="primary">Reimbursement
+    </mat-button-toggle>
+    <mat-button-toggle *ngIf="serv.isAuth" routerLink="wl-table" mat-flat-button color="primary">Work Leave
+    </mat-button-toggle>
+    <mat-button-toggle *ngIf="serv.user?.type === 'admin'" routerLink="userlist" mat-flat-button color="primary">User
+        List</mat-button-toggle>
+</mat-button-toggle-group>
