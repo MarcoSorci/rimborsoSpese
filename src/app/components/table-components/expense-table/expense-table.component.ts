@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Sort } from '@angular/material/sort';
 import { Expense } from 'src/app/models/expense';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ExpenseService } from 'src/app/services/expense.service';
@@ -24,9 +23,6 @@ export class ExpenseTableComponent implements OnInit {
   dataSource = this.serv.expenseList;
   clickedRows = this.serv.clickedRows;
 
-  matDataSource = this.dataSource.value;
-  matDataSource2 = new MatTableDataSource<Expense>(this.serv.expenseList.value);
-
   constructor(
     public dialog: MatDialog,
     public serv: ExpenseService,
@@ -34,11 +30,8 @@ export class ExpenseTableComponent implements OnInit {
     public dialogServ: DialogService
   ) {}
 
-  @ViewChild(MatSort) sort!: MatSort;
-
   ngOnInit(): void {
     this.serv.getExpenses();
-    //this.matDataSource.sort = this.sort;
     if (this.userServ.user?.type === 'admin') {
       this.displayedColumns.unshift('userName');
       this.displayedColumns.push('actions');

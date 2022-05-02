@@ -8,4 +8,6 @@ export interface WorkLeave {
   userName?: string;
   userId?: string;
   approval: string;
+  approvalDate?: Date;
+  approverName?: string;
 }

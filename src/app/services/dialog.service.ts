@@ -5,18 +5,19 @@ import { WlDialogComponent } from '../components/dialog-components/wl-dialog/wl-
 import { Expense } from '../models/expense';
 import { WorkLeave } from '../models/work-leave';
 import { ExpenseService } from './expense.service';
+import { UserService } from './user.service';
 import { WorkLeaveService } from './work-leave.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DialogService {
-
   constructor(
     public dialog: MatDialog,
     public serv: ExpenseService,
+    public userServ: UserService,
     public wlServ: WorkLeaveService
-  ) { }
+  ) {}
 
   clickedRows = this.serv.clickedRows;
 
@@ -68,6 +69,10 @@ export class DialogService {
   }
 
   updateWLData(wl: WorkLeave) {
+    if (wl.approval !== 'pending') {
+      wl.approvalDate = new Date();
+      wl.approverName = this.userServ.user?.username;
+    }
     this.wlServ.update(wl).subscribe({
       next: () => this.wlServ.getWorkLeaves(),
     });
@@ -78,5 +83,4 @@ export class DialogService {
       next: () => this.wlServ.getWorkLeaves(),
     });
   }
-
 }

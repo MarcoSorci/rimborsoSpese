@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort, Sort } from '@angular/material/sort';
-import { WorkLeave } from 'src/app/models/work-leave';
+import { Sort } from '@angular/material/sort';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UserService } from 'src/app/services/user.service';
 import { WorkLeaveService } from 'src/app/services/work-leave.service';
@@ -12,7 +11,7 @@ import { WorkLeaveService } from 'src/app/services/work-leave.service';
   styleUrls: ['./work-leave-table.component.scss'],
 })
 export class WorkLeaveTableComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'hours', 'type', 'approval', 'notes'];
+  displayedColumns: string[] = ['date', 'hours', 'type', 'notes', 'approval', 'approvalDate', 'approverName'];
 
   dataSource = this.serv.workLeaveList;
   constructor(
@@ -21,8 +20,6 @@ export class WorkLeaveTableComponent implements OnInit {
     public userServ: UserService,
     public dialogServ: DialogService
   ) {}
-
-  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.serv.getWorkLeaves();
@@ -33,29 +30,26 @@ export class WorkLeaveTableComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
-    // const data = this.dataSource.slice();
-    // this.dataSource = data.sort((a, b) => {
-    //   const isAsc = sort.direction === 'asc';
-    //   switch (sort.active) {
-    //     case 'date':
-    //       return this.compare(a.date, b.date, isAsc);
-    //     case 'hours':
-    //       return this.compare(a.hours, b.hours, isAsc);
-    //     case 'type':
-    //       return this.compare(a.type, b.type, isAsc);
-    //     case 'approval':
-    //       return this.compare(a.approval, b.approval, isAsc);
-    //     default:
-    //       return 0;
-    //   }
-    // });
+    const data = this.dataSource.value.slice();
+    data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date':
+          return this.compare(a.date, b.date, isAsc);
+        case 'hours':
+          return this.compare(a.hours, b.hours, isAsc);
+        case 'type':
+          return this.compare(a.type, b.type, isAsc);
+        case 'approval':
+          return this.compare(a.approval, b.approval, isAsc);
+        default:
+          return 0;
+      }
+    });
+    this.dataSource.next(data);
   }
 
-  compare(
-    a: number | string | Date,
-    b: number | string | Date,
-    isAsc: boolean
-  ) {
+  compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }

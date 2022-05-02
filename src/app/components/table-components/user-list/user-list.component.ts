@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Sort } from '@angular/material/sort';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { UserlistDialogComponent } from '../../dialog-components/userlist-dialog/userlist-dialog.component';
@@ -14,32 +13,29 @@ import { UserlistDialogComponent } from '../../dialog-components/userlist-dialog
 export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['username', 'type', 'actions'];
 
-  // matdataSource = new MatTableDataSource<User>(this.serv.userList.value);
   dataSource = this.serv.userList;
   constructor(public dialog: MatDialog, public serv: UserService) {}
-
-  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     if (this.serv.user?.type === 'admin') {
       this.serv.getUserList();
     }
-    //this.matdataSource.sort = this.sort;
   }
 
   sortData(sort: Sort) {
-    // const data = this.dataSource.slice();
-    // this.dataSource = data.sort((a, b) => {
-    //   const isAsc = sort.direction === 'asc';
-    //   switch (sort.active) {
-    //     case 'username':
-    //       return this.compare(a.username, b.username, isAsc);
-    //     case 'type':
-    //       return this.compare(a.type, b.type, isAsc);
-    //     default:
-    //       return 0;
-    //   }
-    // });
+    const data = this.dataSource.value.slice();
+    data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'username':
+          return this.compare(a.username, b.username, isAsc);
+        case 'type':
+          return this.compare(a.type, b.type, isAsc);
+        default:
+          return 0;
+      }
+    });
+    this.dataSource.next(data);
   }
 
   compare(a: string, b: string, isAsc: boolean) {
