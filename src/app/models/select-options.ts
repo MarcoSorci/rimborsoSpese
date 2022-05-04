@@ -1,4 +1,4 @@
 export interface SelectOptions {
-  value: string;
+  value: any;
   viewValue: string;
 }

@@ -40,6 +40,8 @@ import { ExpInsertComponent } from './components/insert-components/exp-insert/ex
 import { ExpenseTableComponent } from './components/table-components/expense-table/expense-table.component';
 import { ValidationListComponent } from './components/validation-list/validation-list.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { Calendar2Component } from './components/calendar2/calendar2.component';
+import { CalendarNewComponent } from './components/calendar-new/calendar-new.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     WlDialogComponent,
     ExpInsertComponent,
     ExpenseTableComponent,
-    CalendarComponent
+    CalendarComponent,
+    Calendar2Component,
+    CalendarNewComponent
   ],
   imports: [
     BrowserModule,

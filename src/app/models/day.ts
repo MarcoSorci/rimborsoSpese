@@ -6,5 +6,5 @@ export interface Day {
     monthIndex: number;
 
     weekDayName: string;
-    weekDayNumber: number;
+    weekDayIndex: number;
 }

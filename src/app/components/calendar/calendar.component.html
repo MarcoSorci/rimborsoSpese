@@ -1,4 +1,5 @@
 <div class="calendar">
+    <h2>Calendar</h2>
     <header>
         <button (click)="onPreviousMonth()"> Previous </button>
         <span> {{getMonthName(monthNumber)}} {{year}} </span>
@@ -11,14 +12,32 @@
         </span>
 
         <span *ngFor='let day of monthDays' class="day" (click)="dayClicked(day)">
-                {{day.number}}
+            {{day.number}}
         </span>
     </div>
+    <table>
+        <tr>
+            <th *ngFor='let weekDay of weekDaysName' class="day" id="week">
+                {{weekDay}}
+            </th>
+        </tr>
+        <tr>
+            <td *ngFor='let day of monthDays' class="day" (click)="dayClicked(day)">
+                {{day.number}}
+            </td>
+        </tr>
+    </table>
+    <br>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Native DP</mat-label>
+        <input matInput type="date" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Material DP</mat-label>
+        <input matInput [matDatepicker]="picker" autocomplete="off">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year"></mat-datepicker>
+      </mat-form-field>
 </div>
-<br>
-
-<mat-form-field appearance="fill">
-    <mat-label>Notes</mat-label>
-    <input matInput type="date" autocomplete="off">
-  </mat-form-field>
-

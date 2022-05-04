@@ -9,32 +9,37 @@ import { Day } from 'src/app/models/day';
 export class CalendarComponent implements OnInit {
 
   monthDays: Day[] = [];
-
   monthNumber = 0;
   year = 0;
+  date = new Date();
 
   weekDaysName :string[] = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
-  date = new Date();
 
   constructor() {}
-
+  
   ngOnInit(): void {
     this.setMonthDays(this.getCurrentMonth());
   }
 
+  setMonthDays(days: Day[]): void {
+    this.monthDays = days;
+    this.monthNumber = this.monthDays[0].monthIndex;
+    this.year = this.monthDays[0].year;
+  }
+  
   getCurrentMonth(): Day[] {
     return this.getMonth(this.date.getMonth(), this.date.getFullYear());
   }
-
+  
   getMonth(monthIndex: number, year: number): Day[] {
     let days = [];
 
     let firstday = this.createDay(1, monthIndex, year);
 
-    for (let i = 1; i < firstday.weekDayNumber; i++) {
+    for (let i = 1; i < firstday.weekDayIndex; i++) {
       days.push({
-        weekDayNumber: i,
+        weekDayIndex: i,
         monthIndex: monthIndex,
         year: year,
       } as Day);
@@ -109,17 +114,17 @@ export class CalendarComponent implements OnInit {
       month: '',
       monthIndex: 0,
       weekDayName: '',
-      weekDayNumber: 0,
+      weekDayIndex: 0,
     };
 
     day.monthIndex = monthIndex;
     day.month = this.getMonthName(monthIndex);
 
     day.number = dayNumber;
-    day.year = this.date.getFullYear();
+    day.year = year;
 
-    day.weekDayNumber = new Date(year, monthIndex, dayNumber).getDay();
-    day.weekDayName = this.getWeekDayName(day.weekDayNumber);
+    day.weekDayIndex = new Date(year, monthIndex, dayNumber).getDay();
+    day.weekDayName = this.getWeekDayName(day.weekDayIndex);
 
     return day;
   }
@@ -147,11 +152,6 @@ export class CalendarComponent implements OnInit {
     this.setMonthDays(this.getMonth(this.monthNumber, this.year));
   }
 
-  setMonthDays(days: Day[]): void {
-    this.monthDays = days;
-    this.monthNumber = this.monthDays[0].monthIndex;
-    this.year = this.monthDays[0].year;
-  }
 
   dayClicked(day: Day) {
     console.log(day);

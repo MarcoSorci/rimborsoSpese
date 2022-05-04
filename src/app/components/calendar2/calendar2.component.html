@@ -1,0 +1,25 @@
+<div class="calendar">
+    <h2>Calendar2</h2>
+    <!-- <header>
+        <button (click)="onPreviousMonth()"> Previous </button>
+        <span> {{getMonthName(monthNumber)}} {{year}} </span>
+        <button (click)="onNextMonth()"> Next </button>
+    </header> -->
+    <br>
+
+    <table>
+        <tr>
+            <th *ngFor='let dayName of weekDays' class="day" id="week">
+                {{dayName.viewValue}}
+            </th>
+    </tr>
+    <tr>
+        <td *ngFor='let day of monthDays' class="day" (click)="dayClicked(day)">
+            {{day.number}}
+        </td>
+    </tr>
+
+        
+    </table>
+
+</div>
