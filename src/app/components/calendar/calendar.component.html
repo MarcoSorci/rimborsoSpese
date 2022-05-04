@@ -1,0 +1,24 @@
+<div class="calendar">
+    <header>
+        <button (click)="onPreviousMonth()"> Previous </button>
+        <span> {{getMonthName(monthNumber)}} {{year}} </span>
+        <button (click)="onNextMonth()"> Next </button>
+    </header>
+    <br>
+    <div>
+        <span *ngFor='let weekDay of weekDaysName' class="day" id="week">
+            {{weekDay}}
+        </span>
+
+        <span *ngFor='let day of monthDays' class="day" (click)="dayClicked(day)">
+                {{day.number}}
+        </span>
+    </div>
+</div>
+<br>
+
+<mat-form-field appearance="fill">
+    <mat-label>Notes</mat-label>
+    <input matInput type="date" autocomplete="off">
+  </mat-form-field>
+

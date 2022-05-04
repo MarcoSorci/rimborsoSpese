@@ -1,0 +1,32 @@
+.calendar {
+  width: 230px;
+}
+
+button {
+  border: 1px solid #ccc;
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #ccc;
+}
+
+
+.day {
+  width: 30px;
+  display: inline-block;
+  //border: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer;
+}
+
+.day:hover {
+  background-color: #ccc;
+}
+
+#week:hover{
+  background-color: white;
+  cursor: default;
+}
