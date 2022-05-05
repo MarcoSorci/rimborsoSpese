@@ -1,43 +1,36 @@
 <div class="calendar">
-    <h2>Calendar</h2>
-    <header>
-        <button (click)="onPreviousMonth()"> Previous </button>
-        <span> {{getMonthName(monthNumber)}} {{year}} </span>
-        <button (click)="onNextMonth()"> Next </button>
-    </header>
-    <br>
-    <div>
-        <span *ngFor='let weekDay of weekDaysName' class="day" id="week">
-            {{weekDay}}
-        </span>
 
-        <span *ngFor='let day of monthDays' class="day" (click)="dayClicked(day)">
-            {{day.number}}
-        </span>
+    <div class="header-title-buttons">
+        <span class="title">{{firstDay.month | uppercase}} {{firstDay.year}}</span>
+        <button mat-icon-button class="button prev" (click)="onPreviousMonth()">
+            <mat-icon>navigate_before</mat-icon>
+        </button>
+        <button mat-icon-button class="button next" (click)="onNextMonth()">
+            <mat-icon>navigate_next</mat-icon>
+        </button>
     </div>
+
     <table>
         <tr>
             <th *ngFor='let weekDay of weekDaysName' class="day" id="week">
                 {{weekDay}}
             </th>
         </tr>
+        <mat-divider></mat-divider>
         <tr>
-            <td *ngFor='let day of monthDays' class="day" (click)="dayClicked(day)">
+            <td *ngFor='let day of monthDays' class="day"
+            [ngClass]="day.monthIndex !== activeMonth ? 'prev-next-month' : day.isToday ? 'active-day' : 'active-month'"
+            (click)="onDaySelected(day)">
                 {{day.number}}
             </td>
         </tr>
     </table>
-    <br>
-    
-    <mat-form-field appearance="fill">
-        <mat-label>Native DP</mat-label>
-        <input matInput type="date" autocomplete="off">
-    </mat-form-field>
+      
 
-    <mat-form-field appearance="fill">
-        <mat-label>Material DP</mat-label>
-        <input matInput [matDatepicker]="picker" autocomplete="off">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker startView="year"></mat-datepicker>
-      </mat-form-field>
 </div>
+
+
+
+
+
+

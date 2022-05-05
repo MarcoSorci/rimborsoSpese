@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Day } from 'src/app/models/day';
 
 @Component({
@@ -9,154 +9,146 @@ import { Day } from 'src/app/models/day';
 export class CalendarComponent implements OnInit {
 
   monthDays: Day[] = [];
-  monthNumber = 0;
-  year = 0;
   date = new Date();
+  weekDaysName :string[] = ["M", "T", "W", "T", "F", "S", "S"];
 
-  weekDaysName :string[] = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+  activeYear = this.date.getFullYear();
+  activeMonth = this.date.getMonth();
+  firstDay!: Day;
 
+  @Input() selectedDate?: Day;
+  constructor() { }
 
-  constructor() {}
-  
   ngOnInit(): void {
-    this.setMonthDays(this.getCurrentMonth());
+    this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear);
   }
 
-  setMonthDays(days: Day[]): void {
-    this.monthDays = days;
-    this.monthNumber = this.monthDays[0].monthIndex;
-    this.year = this.monthDays[0].year;
-  }
-  
-  getCurrentMonth(): Day[] {
-    return this.getMonth(this.date.getMonth(), this.date.getFullYear());
-  }
-  
-  getMonth(monthIndex: number, year: number): Day[] {
-    let days = [];
-
-    let firstday = this.createDay(1, monthIndex, year);
-
-    for (let i = 1; i < firstday.weekDayIndex; i++) {
-      days.push({
-        weekDayIndex: i,
-        monthIndex: monthIndex,
-        year: year,
-      } as Day);
+  createDay(dayNumber: number, monthIndex: number, year: number): Day {
+    let newDay = new Day();
+    newDay.number = dayNumber;
+    newDay.monthIndex = monthIndex;
+    newDay.month = this.getMonthName(monthIndex);
+    newDay.year = this.activeYear;
+    newDay.weekDayIndex = new Date(year, monthIndex, dayNumber - 1).getDay();
+    newDay.weekDayName = this.getWeekDayName(newDay.weekDayIndex);
+    if (this.date.getDate() === dayNumber && this.date.getMonth() === monthIndex && this.date.getFullYear() === year) {
+      newDay.isToday = true;
     }
-    days.push(firstday);
+     return newDay;
+  }
 
-    let countDaysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-    for (let i = 2; i < countDaysInMonth + 1; i++) {
-      days.push(this.createDay(i, monthIndex, year));
-    }
-
+  getMonthDays(monthIndex: number, year: number): Day[] {
+    let days: Day[] = [];
+    this.firstDay = this.createDay(1, monthIndex, year);
+    let dayCount = new Date(year, monthIndex + 1, 0).getDate();
+    
+    this.getPreviousDays(days, monthIndex - 1, year);
+    this.getCurrentDays(days, monthIndex, year, dayCount);
+    this.getFollowingDays(days, monthIndex, year, dayCount);
+    
     return days;
   }
+
+  getPreviousDays(daysArray: Day[], monthIndex: number, year: number) {
+    let countDaysInPrevMonth = new Date(year, monthIndex, 0).getDate();
+    let lastPrevDay = this.createDay(countDaysInPrevMonth, monthIndex, year);
+    for (let i = 1; i < this.firstDay.weekDayIndex +1; i++) {
+      daysArray.unshift(this.createDay(lastPrevDay.number, monthIndex, year));
+      lastPrevDay.number --;
+    }
+  }
+  getCurrentDays(daysArray: Day[], monthIndex: number, year: number, dayCount: number) {
+    for (let i = 1; i < dayCount + 1; i++) { 
+      daysArray.push(this.createDay(i, monthIndex, year));
+    }
+  }
+  getFollowingDays(daysArray: Day[], monthIndex: number, year: number, dayCount: number) {
+    let lastDay = this.createDay(dayCount, monthIndex, year);
+    for (let i = lastDay.weekDayIndex; i < 6; i++) {
+      daysArray.push(this.createDay(this.firstDay.number, monthIndex + 1, year));
+      this.firstDay.number++;
+    }
+  }
+
+  onNextMonth(): void {
+    this.activeMonth++;
+    if (this.activeMonth === 12) {
+      this.activeYear++;
+      this.activeMonth = 1;
+    }
+    this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear)
+  }
+
+  onPreviousMonth() : void{
+    this.activeMonth--;
+    if (this.activeMonth < 0) {
+      this.activeYear--;
+      this.activeMonth = 11;
+    }
+    this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear)
+  }
+
+
+
+
+  onDaySelected(day: Day) {
+    this.selectedDate = day;
+    console.log(this.selectedDate);
+    
+  }
+
 
   getMonthName(monthIndex: number): string {
     switch (monthIndex) {
       case 0:
-        return 'January';
+        return 'Jan';
       case 1:
-        return 'February';
+        return 'Feb';
       case 2:
-        return 'March';
+        return 'Mar';
       case 3:
-        return 'April';
+        return 'Apr';
       case 4:
         return 'May';
       case 5:
-        return 'June';
+        return 'Jun';
       case 6:
-        return 'July';
+        return 'Jul';
       case 7:
-        return 'August';
+        return 'Aug';
       case 8:
-        return 'September';
+        return 'Sep';
       case 9:
-        return 'October';
+        return 'Oct';
       case 10:
-        return 'November';
+        return 'Nov';
       case 11:
-        return 'December';
+        return 'Dec';
 
       default:
-        return 'January';
+        return '';
     }
   }
 
   getWeekDayName(weekDay: number): string {
     switch (weekDay) {
       case 0:
-        return 'Mo';
+        return 'Mon';
       case 1:
-        return 'Tu';
+        return 'Tue';
       case 2:
-        return 'We';
+        return 'Wed';
       case 3:
-        return 'Th';
+        return 'Thu';
       case 4:
-        return 'Fr';
+        return 'Fri';
       case 5:
-        return 'Sa';
+        return 'Sat';
       case 6:
-        return 'Su';
+        return 'Sun';
       default:
         return '';
     }
   }
 
-  createDay(dayNumber: number, monthIndex: number, year: number) {
-    let day: Day = {
-      number: 0,
-      year: 0,
-      month: '',
-      monthIndex: 0,
-      weekDayName: '',
-      weekDayIndex: 0,
-    };
-
-    day.monthIndex = monthIndex;
-    day.month = this.getMonthName(monthIndex);
-
-    day.number = dayNumber;
-    day.year = year;
-
-    day.weekDayIndex = new Date(year, monthIndex, dayNumber).getDay();
-    day.weekDayName = this.getWeekDayName(day.weekDayIndex);
-
-    return day;
-  }
-
-
-  onNextMonth(): void {
-    this.monthNumber++;
-
-    if (this.monthNumber === 13) {
-      this.year++;
-      this.monthNumber = 1;
-    }
-
-    this.setMonthDays(this.getMonth(this.monthNumber, this.year));
-  }
-
-  onPreviousMonth() : void{
-    this.monthNumber--;
-
-    if (this.monthNumber < 1) {
-      this.year--;
-      this.monthNumber = 12;
-    }
-
-    this.setMonthDays(this.getMonth(this.monthNumber, this.year));
-  }
-
-
-  dayClicked(day: Day) {
-    console.log(day);
-  }
 }
-
-
-

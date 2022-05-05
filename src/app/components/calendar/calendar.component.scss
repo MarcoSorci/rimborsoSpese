@@ -1,33 +1,109 @@
 .calendar {
-  border: 3px solid blue;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  display: flex;
+  flex-direction: column;
   width: 230px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 8px;
 }
-
-button {
-  border: 1px solid #ccc;
-  text-align: center;
-  background-color: white;
-  cursor: pointer;
-}
-
-button:hover{
-  background-color: #ccc;
-}
-
 
 .day {
   width: 30px;
+  height: 30px;
   display: inline-block;
-  //border: 1px solid #ccc;
   text-align: center;
+  line-height: 30px;
   cursor: pointer;
 }
 
 .day:hover {
-  background-color: #ccc;
+  background-color: #C5CAE9;
+  border-radius: 999px;
 }
 
-#week:hover{
+#week {
+  color: rgba(0,0,0,.54);
+}
+
+#week:hover {
   background-color: white;
   cursor: default;
 }
+
+
+
+
+
+.calendar-container-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title-buttons{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+
+button {
+  background-color: rgba(255, 0, 0, 0);
+  border-style: none;
+}
+
+img {
+  width: 20px;
+  background-color: none;
+}
+
+.calendar-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(36, 145, 188);
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+
+.days-of-week-container,
+.calendar-container {
+display: grid;
+text-align: center;
+grid-template-columns: repeat(7, 70px);
+}
+
+
+.days-of-week-container>div:nth-child(even) {
+  background-color: rgba(159, 159, 159, 0.904);
+}
+
+.prev-next-month {
+  color: rgb(158, 158, 158);
+}
+
+.active-day {
+  border: 1px solid rgba(0,0,0,.38);
+  border-radius: 999px;
+}
+
+.days {
+  height: 50px;
+  text-align:center;
+}
+
+.days p{
+  padding-top: 20%;
+}
+
+.weekend {
+  background-color: aqua;
+}
+
+

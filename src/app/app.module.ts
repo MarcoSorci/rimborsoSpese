@@ -40,8 +40,7 @@ import { ExpInsertComponent } from './components/insert-components/exp-insert/ex
 import { ExpenseTableComponent } from './components/table-components/expense-table/expense-table.component';
 import { ValidationListComponent } from './components/validation-list/validation-list.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { Calendar2Component } from './components/calendar2/calendar2.component';
-import { CalendarNewComponent } from './components/calendar-new/calendar-new.component';
+import { LegacyCalendarsComponent } from './legacy-calendars/legacy-calendars.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +59,7 @@ import { CalendarNewComponent } from './components/calendar-new/calendar-new.com
     ExpInsertComponent,
     ExpenseTableComponent,
     CalendarComponent,
-    Calendar2Component,
-    CalendarNewComponent
+    LegacyCalendarsComponent
   ],
   imports: [
     BrowserModule,
