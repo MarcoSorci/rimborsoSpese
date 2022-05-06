@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   MatDateFormats,
   MAT_DATE_FORMATS,
@@ -9,6 +9,8 @@ import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
+import { Day } from 'src/app/models/day';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   ...MAT_NATIVE_DATE_FORMATS,
@@ -31,6 +33,8 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
 })
 export class ExpInsertComponent {
 
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+
   constructor(
     public serv: ExpenseService,
     public userServ: UserService,
@@ -46,6 +50,7 @@ export class ExpInsertComponent {
     id: '',
     userName: '',
   };
+
 
   expenseTypes: SelectOptions[] = [
     { value: 'transport', viewValue: 'Transport' },
@@ -73,5 +78,10 @@ export class ExpInsertComponent {
       error: () => {},
     });
     this.router.navigate(['table']);
+  }
+
+  onDaySelected(day: Day) {
+    this.expenseModel.date = new Date(day.year, day.monthIndex, day.number).toISOString();
+    this.trigger.closeMenu();
   }
 }

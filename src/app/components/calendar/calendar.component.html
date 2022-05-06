@@ -2,12 +2,14 @@
 
     <div class="header-title-buttons">
         <span class="title">{{firstDay.month | uppercase}} {{firstDay.year}}</span>
-        <button mat-icon-button class="button prev" (click)="onPreviousMonth()">
-            <mat-icon>navigate_before</mat-icon>
-        </button>
-        <button mat-icon-button class="button next" (click)="onNextMonth()">
-            <mat-icon>navigate_next</mat-icon>
-        </button>
+        <span class="button-cont">
+            <button mat-icon-button class="button prev" (click)="onPreviousMonth()">
+                <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button mat-icon-button class="button next" (click)="onNextMonth()">
+                <mat-icon>navigate_next</mat-icon>
+            </button>
+        </span>
     </div>
 
     <table>
@@ -19,7 +21,7 @@
         <mat-divider></mat-divider>
         <tr>
             <td *ngFor='let day of monthDays' class="day"
-            [ngClass]="day.monthIndex !== activeMonth ? 'prev-next-month' : day.isToday ? 'active-day' : 'active-month'"
+            [ngClass]="day.monthIndex !== activeMonth ? 'inactive-months' : day.isToday ? 'active-day' : 'active-month'"
             (click)="onDaySelected(day)">
                 {{day.number}}
             </td>

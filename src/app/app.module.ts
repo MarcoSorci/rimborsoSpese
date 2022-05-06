@@ -29,6 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { UserListComponent } from './components/table-components/user-list/user-list.component';
 import { UserlistDialogComponent } from './components/dialog-components/userlist-dialog/userlist-dialog.component';
@@ -59,7 +60,7 @@ import { LegacyCalendarsComponent } from './legacy-calendars/legacy-calendars.co
     ExpInsertComponent,
     ExpenseTableComponent,
     CalendarComponent,
-    LegacyCalendarsComponent
+    LegacyCalendarsComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +86,7 @@ import { LegacyCalendarsComponent } from './legacy-calendars/legacy-calendars.co
     MatSortModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

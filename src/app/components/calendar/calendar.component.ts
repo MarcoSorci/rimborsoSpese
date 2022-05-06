@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Day } from 'src/app/models/day';
 
 @Component({
@@ -16,7 +16,8 @@ export class CalendarComponent implements OnInit {
   activeMonth = this.date.getMonth();
   firstDay!: Day;
 
-  @Input() selectedDate?: Day;
+  @Output() dateSelected = new EventEmitter<Day>();
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -88,13 +89,9 @@ export class CalendarComponent implements OnInit {
     this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear)
   }
 
-
-
-
   onDaySelected(day: Day) {
-    this.selectedDate = day;
-    console.log(this.selectedDate);
-    
+    this.dateSelected.emit(day);
+    console.log(day);
   }
 
 
