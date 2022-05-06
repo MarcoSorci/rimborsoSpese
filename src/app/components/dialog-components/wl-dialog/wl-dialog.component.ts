@@ -1,5 +1,7 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { Day } from 'src/app/models/day';
 import { SelectOptions } from 'src/app/models/select-options';
 import { WorkLeave } from 'src/app/models/work-leave';
 import { UserService } from 'src/app/services/user.service';
@@ -12,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class WlDialogComponent {
   action: string;
   local_data: any;
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   constructor(
     public dialogRef: MatDialogRef<WlDialogComponent>,
@@ -34,6 +37,11 @@ export class WlDialogComponent {
     { value: 'approved', viewValue: 'Approved' },
     { value: 'denied', viewValue: 'Denied' },
   ];
+
+  onDaySelected(day: Day) {
+    this.local_data.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(5,16);
+    this.trigger.closeMenu();
+  }
 
   doAction() {
     this.dialogRef.close({ event: this.action, data: this.local_data });

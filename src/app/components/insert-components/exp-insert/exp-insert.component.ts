@@ -23,8 +23,6 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
   },
 };
 
-
-
 @Component({
   selector: 'app-exp-insert',
   templateUrl: './exp-insert.component.html',
@@ -32,7 +30,6 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
   providers: [{ provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }],
 })
 export class ExpInsertComponent {
-
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   constructor(
@@ -50,7 +47,6 @@ export class ExpInsertComponent {
     id: '',
     userName: '',
   };
-
 
   expenseTypes: SelectOptions[] = [
     { value: 'transport', viewValue: 'Transport' },
@@ -81,7 +77,7 @@ export class ExpInsertComponent {
   }
 
   onDaySelected(day: Day) {
-    this.expenseModel.date = new Date(day.year, day.monthIndex, day.number).toISOString();
+    this.expenseModel.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(8,16);
     this.trigger.closeMenu();
   }
 }

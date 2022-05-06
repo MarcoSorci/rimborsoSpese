@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit {
   activeYear = this.date.getFullYear();
   activeMonth = this.date.getMonth();
   firstDay!: Day;
+  isRangeSelector = false;
 
   @Output() dateSelected = new EventEmitter<Day>();
   
@@ -75,7 +76,7 @@ export class CalendarComponent implements OnInit {
     this.activeMonth++;
     if (this.activeMonth === 12) {
       this.activeYear++;
-      this.activeMonth = 1;
+      this.activeMonth = 0;
     }
     this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear)
   }
@@ -92,6 +93,16 @@ export class CalendarComponent implements OnInit {
   onDaySelected(day: Day) {
     this.dateSelected.emit(day);
     console.log(day);
+  }
+
+  onRangeSelect(day: Day){
+    let rangeSelection!: boolean
+    if(!rangeSelection){
+      let startingDay = day;
+      rangeSelection = true;
+
+    }
+
   }
 
 

@@ -1,10 +1,12 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, Optional, ViewChild } from '@angular/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 import { UserService } from 'src/app/services/user.service';
 import { GRI_DATE_FORMATS } from '../../insert-components/exp-insert/exp-insert.component';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { Day } from 'src/app/models/day';
 
 @Component({
   selector: 'app-expense-dialog',
@@ -16,6 +18,7 @@ import { GRI_DATE_FORMATS } from '../../insert-components/exp-insert/exp-insert.
 export class ExpenseDialogComponent {
   action: string;
   local_data: any;
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   expenseTypes: SelectOptions[] = [
     { value: 'transport', viewValue: 'Transport' },
@@ -38,6 +41,11 @@ export class ExpenseDialogComponent {
     console.log(data);
     this.local_data = { ...data };
     this.action = this.local_data.action;
+  }
+
+  onDaySelected(day: Day) {
+    this.local_data.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(8,16);
+    this.trigger.closeMenu();
   }
 
   doAction() {

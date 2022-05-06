@@ -1,9 +1,10 @@
 <div class="container">
   <mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input #dateVal="ngModel" required matInput [(ngModel)]="expenseModel.date" datetime="MM/yyyy" autocomplete="off">
-    <mat-hint>MM/YYYY</mat-hint>
-    <button id="calendar-btn" mat-icon-button matSuffix [matMenuTriggerFor]="menu"><img src="./assets/calendar.svg" alt=""></button>
+    <mat-label>Pertinent Month</mat-label>
+    <input #dateVal="ngModel" required matInput [(ngModel)]="expenseModel.date" autocomplete="off">
+    <button id="calendar-btn" mat-icon-button matSuffix [matMenuTriggerFor]="menu">
+      <mat-icon>today</mat-icon>
+    </button>
     <mat-menu #menu="matMenu" xPosition="before">
       <app-calendar (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
     </mat-menu>

@@ -1,11 +1,13 @@
 <div class="container">
     <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input #dateVal="ngModel" required matInput [matDatepicker]="picker" [(ngModel)]="leaveModel.date"
-            autocomplete="off">
-        <mat-hint>MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="false"></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker startView="year" [disabled]="false"></mat-datepicker>
+        <mat-label>Date</mat-label>
+        <input #dateVal="ngModel" required matInput [(ngModel)]="leaveModel.date" autocomplete="off">
+    <button id="calendar-btn" mat-icon-button matSuffix [matMenuTriggerFor]="menu">
+      <mat-icon>today</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <app-calendar (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
+    </mat-menu>
         <mat-error *ngIf="dateVal.invalid && dateVal.touched">
             Field is mandatory.
         </mat-error>

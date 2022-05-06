@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { Day } from 'src/app/models/day';
 import { SelectOptions } from 'src/app/models/select-options';
 import { WorkLeave } from 'src/app/models/work-leave';
 import { UserService } from 'src/app/services/user.service';
@@ -11,6 +13,7 @@ import { WorkLeaveService } from 'src/app/services/work-leave.service';
   styleUrls: ['./wl-insert.component.scss'],
 })
 export class WlInsertComponent {
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   constructor(
     public serv: WorkLeaveService,
     public userServ: UserService,
@@ -37,5 +40,10 @@ export class WlInsertComponent {
       },
     });
     this.router.navigate(['/wl-table']);
+  }
+
+  onDaySelected(day: Day) {
+    this.leaveModel.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(5,16);
+    this.trigger.closeMenu();
   }
 }
