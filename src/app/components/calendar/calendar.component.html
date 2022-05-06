@@ -22,7 +22,7 @@
         <tr>
             <td *ngFor='let day of monthDays' class="day"
             [ngClass]="day.monthIndex !== activeMonth ? 'inactive-months' : day.isToday ? 'active-day' : 'active-month'"
-            (click)="onDaySelected(day); isRangeSelector && onRangeSelect(day)">
+            (click)="isRangeSelector ? onRangeSelect(day) : onDaySelected(day)">
                 {{day.number}}
             </td>
         </tr>

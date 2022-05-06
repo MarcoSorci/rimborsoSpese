@@ -1,12 +1,12 @@
 <div class="container">
   <mat-form-field appearance="fill">
-    <mat-label>Pertinent Month</mat-label>
+    <mat-label>Date</mat-label>
     <input #dateVal="ngModel" required matInput [(ngModel)]="expenseModel.date" autocomplete="off">
     <button id="calendar-btn" mat-icon-button matSuffix [matMenuTriggerFor]="menu">
       <mat-icon>today</mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="before">
-      <app-calendar (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
+      <app-calendar [isRangeSelector]="false" (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
     </mat-menu>
     <mat-error *ngIf="dateVal.invalid && dateVal.touched">
       Field is mandatory.

@@ -6,7 +6,7 @@
       <mat-icon>today</mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="before">
-      <app-calendar (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
+      <app-calendar [isRangeSelector]="true" (rangeSelected)="onRangeSelect($event)" (click)="$event.stopPropagation()"></app-calendar>
     </mat-menu>
         <mat-error *ngIf="dateVal.invalid && dateVal.touched">
             Field is mandatory.

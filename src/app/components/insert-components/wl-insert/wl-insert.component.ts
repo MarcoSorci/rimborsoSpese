@@ -43,7 +43,24 @@ export class WlInsertComponent {
   }
 
   onDaySelected(day: Day) {
-    this.leaveModel.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(5,16);
+    this.leaveModel.date = new Date(day.year, day.monthIndex, day.number + 1)
+      .toUTCString()
+      .substring(5, 16);
     this.trigger.closeMenu();
+  }
+
+  onRangeSelect(range: Day[]) {
+    let start = range[0];
+    let end = range[range.length - 1];
+    let startDate = new Date(start.year, start.monthIndex, start.number + 1)
+      .toUTCString()
+      .substring(5, 16);
+    let endDate = new Date(end.year, end.monthIndex, end.number + 1)
+      .toUTCString()
+      .substring(5, 16);
+    if (startDate && endDate) {
+      this.leaveModel.date = startDate + ' - ' + endDate;
+      this.trigger.closeMenu();
+    }
   }
 }
