@@ -41,7 +41,6 @@ import { ExpInsertComponent } from './components/insert-components/exp-insert/ex
 import { ExpenseTableComponent } from './components/table-components/expense-table/expense-table.component';
 import { ValidationListComponent } from './components/validation-list/validation-list.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { LegacyCalendarsComponent } from './legacy-calendars/legacy-calendars.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +59,6 @@ import { LegacyCalendarsComponent } from './legacy-calendars/legacy-calendars.co
     ExpInsertComponent,
     ExpenseTableComponent,
     CalendarComponent,
-    LegacyCalendarsComponent,
   ],
   imports: [
     BrowserModule,
