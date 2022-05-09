@@ -28,6 +28,22 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        this.onNextMonth();
+      }
+      if (e.key === 'ArrowLeft') {
+        this.onPreviousMonth();
+      }
+      if (e.key === 'ArrowUp') {
+        this.activeYear++;
+        this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear);
+      }
+      if (e.key === 'ArrowDown') {
+        this.activeYear--;
+        this.monthDays = this.getMonthDays(this.activeMonth, this.activeYear);
+      }
+    });
   }
 
   createDay(dayNumber: number, monthIndex: number, year: number): Day {
@@ -59,7 +75,6 @@ export class CalendarComponent implements OnInit {
 
     return days;
   }
-
   getPreviousDays(daysArray: Day[], monthIndex: number, year: number) {
     let countDaysInPrevMonth = new Date(year, monthIndex, 0).getDate();
     let lastPrevDay = this.createDay(countDaysInPrevMonth, monthIndex, year);
@@ -117,6 +132,14 @@ export class CalendarComponent implements OnInit {
   }
 
   onRangeSelect(day: Day) {
+    day.isSelected = true;
+    if (this.startingDay && this.endingDay) {
+      this.startingDay.isSelected = false;
+      this.endingDay.isSelected = false;
+      this.startingDay = undefined;
+      this.endingDay = undefined;
+      this.rangeArray = [];
+    }
     if (!this.rangeSelection) {
       this.startingDay = day;
       this.rangeSelection = true;
@@ -129,23 +152,26 @@ export class CalendarComponent implements OnInit {
     this.createRange();
   }
 
-  createRange(){
-    if (this.startingDay && this.endingDay) {
+  createRange() {
+  if (this.startingDay && this.endingDay) {
       if (this.startingDay.number < this.endingDay.number) {
-        this.rangeArray.push(this.startingDay);
-        const newDay = this.startingDay;
-        for (let i = newDay.number; i < this.endingDay.number; i++) {
-          newDay.number = i + 1;
-          this.rangeArray.push(newDay);
+        for (let i = this.startingDay.number; i < this.endingDay.number; i++) {
+          this.rangeArray.push(
+            this.createDay(
+              i,
+              this.startingDay.monthIndex,
+              this.startingDay.year
+            )
+          );
         }
         this.rangeArray.push(this.endingDay);
         console.log('range array', this.rangeArray);
         this.rangeSelected.emit(this.rangeArray);
-      } 
-      else {
+      } else {
         console.log('error, choose another range');
         this.startingDay = undefined;
         this.endingDay = undefined;
+        this.rangeArray = [];
       }
     }
   }

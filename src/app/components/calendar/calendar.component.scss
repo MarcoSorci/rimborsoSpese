@@ -6,6 +6,7 @@
   align-items: center;
   border-radius: 4px;
   padding: 8px;
+  overflow: visible;
 }
 
 .day {
@@ -19,6 +20,12 @@
 
 .day:hover {
   background-color: #C5CAE9;
+  border-radius: 999px;
+}
+
+.selected {
+  background-color: #C5CAE9;
+ // border: 1px solid rgba(0,0,0,.38);
   border-radius: 999px;
 }
 
@@ -44,7 +51,7 @@
 }
 
 
-.inactive-months {
+.inactive-days {
   color: rgb(158, 158, 158);
 }
 

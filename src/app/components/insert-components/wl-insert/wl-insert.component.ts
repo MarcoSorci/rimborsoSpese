@@ -42,13 +42,6 @@ export class WlInsertComponent {
     this.router.navigate(['/wl-table']);
   }
 
-  onDaySelected(day: Day) {
-    this.leaveModel.date = new Date(day.year, day.monthIndex, day.number + 1)
-      .toUTCString()
-      .substring(5, 16);
-    this.trigger.closeMenu();
-  }
-
   onRangeSelect(range: Day[]) {
     let start = range[0];
     let end = range[range.length - 1];
