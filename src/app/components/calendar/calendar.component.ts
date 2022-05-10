@@ -10,12 +10,10 @@ import { CalendarService } from 'src/app/services/calendar.service';
 export class CalendarComponent implements OnInit {
   monthDays: Day[] = [];
 
-  activeMonth = this.serv.activeMonth
-  activeYear = this.serv.activeYear
-  
-  weekDaysName: string[] = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  activeMonth = this.serv.activeMonth;
+  activeYear = this.serv.activeYear;
 
-  
+  weekDaysName: string[] = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   rangeSelection!: boolean;
   startingDay?: Day;
@@ -39,16 +37,20 @@ export class CalendarComponent implements OnInit {
       }
       if (e.key === 'ArrowUp') {
         this.activeYear++;
-        this.monthDays = this.serv.getMonthDays(this.activeMonth, this.activeYear);
+        this.monthDays = this.serv.getMonthDays(
+          this.activeMonth,
+          this.activeYear
+        );
       }
       if (e.key === 'ArrowDown') {
         this.activeYear--;
-        this.monthDays = this.serv.getMonthDays(this.activeMonth, this.activeYear);
+        this.monthDays = this.serv.getMonthDays(
+          this.activeMonth,
+          this.activeYear
+        );
       }
     });
   }
-
-
 
   onNextMonth(): void {
     this.activeMonth++;
@@ -83,15 +85,10 @@ export class CalendarComponent implements OnInit {
       this.rangeArray.forEach((e) => this.checkIfSelected(e, true));
       this.rangeArray = [];
     }
-    if (!this.rangeSelection) {
-      this.startingDay = day;
-      this.rangeSelection = true;
-      console.log('starting day', this.startingDay);
-    } else {
-      this.endingDay = day;
-      this.rangeSelection = false;
-      console.log('ending day', this.endingDay);
-    }
+    !this.rangeSelection
+      ? ((this.startingDay = day), (this.rangeSelection = true))
+      : ((this.endingDay = day), (this.rangeSelection = false));
+
     this.createRange();
   }
 

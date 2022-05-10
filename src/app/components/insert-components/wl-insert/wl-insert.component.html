@@ -14,14 +14,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>Hours of Leave</mat-label>
-        <input #hoursVal="ngModel" required matInput [(ngModel)]="leaveModel.hours" autocomplete="off">
-        <mat-error *ngIf="hoursVal.invalid && hoursVal.touched">
-            Field is mandatory.
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
         <mat-label>Motivation for Leave</mat-label>
         <mat-select #typeVal="ngModel" required [(ngModel)]="leaveModel.type">
             <mat-option *ngFor="let type of leaveTypes" [value]="type.value">{{type.viewValue}}</mat-option>
@@ -37,6 +29,6 @@
         <input matInput [(ngModel)]="leaveModel.notes" autocomplete="off">
     </mat-form-field>
 
-    <button (click)="insert(leaveModel)" [disabled]="dateVal.invalid || typeVal.invalid || hoursVal.invalid"
+    <button (click)="insert(leaveModel)" [disabled]="dateVal.invalid || typeVal.invalid"
         mat-flat-button color="primary">Send Request</button>
 </div>
