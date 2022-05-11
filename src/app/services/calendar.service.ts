@@ -19,7 +19,7 @@ export class CalendarService {
     newDay.number = dayNumber;
     newDay.monthIndex = monthIndex;
     newDay.month = Day.getMonthName(monthIndex);
-    newDay.year = this.activeYear;
+    newDay.year = year
     newDay.weekDayIndex = new Date(year, monthIndex, dayNumber - 1).getDay();
     newDay.weekDayName = Day.getWeekDayName(newDay.weekDayIndex);
     newDay.dayId = newDay.number + newDay.monthIndex + newDay.year;

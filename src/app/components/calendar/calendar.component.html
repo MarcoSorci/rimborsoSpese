@@ -1,12 +1,11 @@
 <div class="calendar">
-
     <div class="header-title-buttons">
         <span class="title">{{serv.firstDay.month | uppercase}} {{serv.firstDay.year}}</span>
-        <span class="button-cont" >
-            <button mat-icon-button class="button prev" (click)="onPreviousMonth()">
+        <span>
+            <button mat-icon-button (click)="onPreviousMonth()">
                 <mat-icon>navigate_before</mat-icon>
             </button>
-            <button mat-icon-button class="button next" (click)="onNextMonth()">
+            <button mat-icon-button (click)="onNextMonth()">
                 <mat-icon>navigate_next</mat-icon>
             </button>
         </span>
@@ -27,6 +26,4 @@
             </td>
         </tr>
     </table>
-
-
 </div>

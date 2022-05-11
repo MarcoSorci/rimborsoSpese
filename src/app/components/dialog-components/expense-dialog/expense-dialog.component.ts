@@ -43,7 +43,7 @@ export class ExpenseDialogComponent {
     this.action = this.local_data.action;
   }
 
-  onDaySelected(day: Day) {
+  onDateSelection(day: Day) {
     this.local_data.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(8,16);
     this.trigger.closeMenu();
   }

@@ -2,12 +2,13 @@
 
   <div *ngIf="action != 'Delete';else elseTemplate">
     <mat-form-field>
-      <input placeholder="Date" matInput [(ngModel)]="local_data.date" autocomplete="off">
+      <input placeholder="Pertinent Month" matInput [(ngModel)]="local_data.date" autocomplete="off">
       <button id="calendar-btn" mat-icon-button matSuffix [matMenuTriggerFor]="menu">
         <mat-icon>today</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
-        <app-calendar (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
+        <!-- <app-calendar (dateSelected)="onDateSelection($event)" (click)="$event.stopPropagation()"></app-calendar> -->
+        <app-calendar-month (dateSelected)="onDateSelection($event)" (click)="$event.stopPropagation()"></app-calendar-month>
       </mat-menu>
     </mat-form-field>
 

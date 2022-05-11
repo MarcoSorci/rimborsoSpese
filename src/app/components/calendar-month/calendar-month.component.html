@@ -1,0 +1,22 @@
+<div class="month-picker">
+    <div class="header-title-buttons">
+        <span class="title">{{this.activeYear}}</span>
+        <span>
+            <button mat-icon-button (click)="onPreviousYear()">
+                <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onNextYear()">
+                <mat-icon>navigate_next</mat-icon>
+            </button>
+        </span>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="month-list">
+        <span *ngFor='let month of monthsList' class="month" (click)="onMonthSelected(month.value)">
+            {{month.viewValue}}
+        </span>
+    </div>
+
+</div>

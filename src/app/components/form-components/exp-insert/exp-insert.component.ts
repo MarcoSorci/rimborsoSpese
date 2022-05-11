@@ -76,7 +76,7 @@ export class ExpInsertComponent {
     this.router.navigate(['table']);
   }
 
-  onDaySelected(day: Day) {
+  onDateSelection(day: Day) {
     this.expenseModel.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(8,16);
     this.trigger.closeMenu();
   }

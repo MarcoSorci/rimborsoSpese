@@ -1,0 +1,48 @@
+.month-picker {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    padding: 8px;
+    overflow: visible;
+  }
+
+  .month-list{
+    height: 160px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  
+  .month {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .month:hover {
+    background-color: #C5CAE9;
+    border-radius: 999px;
+  }
+
+
+  .header-title-buttons{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .title{
+    margin-left: 10px;
+  }
+  
+  
+  
+  
+  
