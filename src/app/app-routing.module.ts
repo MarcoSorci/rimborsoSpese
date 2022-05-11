@@ -4,9 +4,9 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserListComponent } from './components/table-components/user-list/user-list.component';
-import { WlInsertComponent } from './components/insert-components/wl-insert/wl-insert.component';
+import { WlInsertComponent } from './components/form-components/wl-insert/wl-insert.component';
 import { WorkLeaveTableComponent } from './components/table-components/work-leave-table/work-leave-table.component';
-import { ExpInsertComponent } from './components/insert-components/exp-insert/exp-insert.component';
+import { ExpInsertComponent } from './components/form-components/exp-insert/exp-insert.component';
 import { ExpenseTableComponent } from './components/table-components/expense-table/expense-table.component';
 
 const routes: Routes = [

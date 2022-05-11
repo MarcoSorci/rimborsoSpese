@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectOptions } from 'src/app/models/select-options';
 import { Expense } from 'src/app/models/expense';
 import { UserService } from 'src/app/services/user.service';
-import { GRI_DATE_FORMATS } from '../../insert-components/exp-insert/exp-insert.component';
+import { GRI_DATE_FORMATS } from '../../form-components/exp-insert/exp-insert.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Day } from 'src/app/models/day';
 

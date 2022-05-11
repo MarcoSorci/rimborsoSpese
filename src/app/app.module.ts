@@ -34,10 +34,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UserListComponent } from './components/table-components/user-list/user-list.component';
 import { UserlistDialogComponent } from './components/dialog-components/userlist-dialog/userlist-dialog.component';
 import { WorkLeaveTableComponent } from './components/table-components/work-leave-table/work-leave-table.component';
-import { WlInsertComponent } from './components/insert-components/wl-insert/wl-insert.component';
+import { WlInsertComponent } from './components/form-components/wl-insert/wl-insert.component';
 import { ExpenseDialogComponent } from './components/dialog-components/expense-dialog/expense-dialog.component';
 import { WlDialogComponent } from './components/dialog-components/wl-dialog/wl-dialog.component';
-import { ExpInsertComponent } from './components/insert-components/exp-insert/exp-insert.component';
+import { ExpInsertComponent } from './components/form-components/exp-insert/exp-insert.component';
 import { ExpenseTableComponent } from './components/table-components/expense-table/expense-table.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
