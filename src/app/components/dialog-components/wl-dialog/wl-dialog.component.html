@@ -7,12 +7,8 @@
           <mat-icon>today</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <app-calendar (dateSelected)="onDaySelected($event)" (click)="$event.stopPropagation()"></app-calendar>
+          <app-calendar [isRangeSelector]="true" (rangeSelected)="onRangeSelect($event)" (click)="$event.stopPropagation()"></app-calendar>
         </mat-menu>
-      </mat-form-field>
-
-      <mat-form-field>
-          <input placeholder="Hours of Leave" matInput [(ngModel)]="local_data.hours">
       </mat-form-field>
   
       <mat-form-field>

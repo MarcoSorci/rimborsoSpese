@@ -1,6 +1,6 @@
 export interface WorkLeave {
   date: string;
-  hours: string;
+  totalDays: number;
   type: string;
   id: string;
   notes?: string;

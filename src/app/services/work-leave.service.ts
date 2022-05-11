@@ -18,7 +18,7 @@ export class WorkLeaveService {
   leaveModel: WorkLeave = {
     id: '',
     date: '',
-    hours: '',
+    totalDays: 0,
     type: '',
     notes: '',
     approval: '',

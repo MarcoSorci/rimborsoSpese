@@ -11,7 +11,13 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent {
 
   constructor(public serv: UserService, private router: Router,
-    private snack: MatSnackBar) {}
+    private snack: MatSnackBar) {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          this.login();
+        }
+      })
+    }
 
   userModel = this.serv.userModel; 
 

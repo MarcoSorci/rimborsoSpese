@@ -38,10 +38,28 @@ export class WlDialogComponent {
     { value: 'denied', viewValue: 'Denied' },
   ];
 
-  onDaySelected(day: Day) {
-    this.local_data.date = new Date(day.year,day.monthIndex,day.number + 1).toUTCString().substring(5,16);
-    this.trigger.closeMenu();
+  onRangeSelect(range: Day[]) {
+    let start = range[0];
+    let end = range[range.length - 1];
+    let startDate = new Date(start.year, start.monthIndex, start.number + 1);
+    let endDate = new Date(end.year, end.monthIndex, end.number + 1);
+    if (startDate && endDate) {
+      this.local_data.date =
+        startDate.toUTCString().substring(5, 16) +
+        ' - ' +
+        endDate.toUTCString().substring(5, 16);
+      this.local_data.totalDays = (this.dateDiffInDays(startDate, endDate) + 1);
+      this.trigger.closeMenu();
+    }
   }
+
+
+dateDiffInDays(a:Date, b:Date) {
+  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
+}
 
   doAction() {
     this.dialogRef.close({ event: this.action, data: this.local_data });

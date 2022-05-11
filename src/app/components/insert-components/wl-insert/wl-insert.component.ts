@@ -52,7 +52,7 @@ export class WlInsertComponent {
         startDate.toUTCString().substring(5, 16) +
         ' - ' +
         endDate.toUTCString().substring(5, 16);
-      this.leaveModel.hours = (this.dateDiffInDays(startDate, endDate) + 1).toString();
+      this.leaveModel.totalDays = (this.dateDiffInDays(startDate, endDate) + 1);
       this.trigger.closeMenu();
     }
   }

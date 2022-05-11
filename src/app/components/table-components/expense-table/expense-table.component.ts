@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { Expense } from 'src/app/models/expense';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ExpenseService } from 'src/app/services/expense.service';
 import { UserService } from 'src/app/services/user.service';
+import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-expense-table',
   templateUrl: './expense-table.component.html',
   styleUrls: ['./expense-table.component.scss'],
 })
-export class ExpenseTableComponent implements OnInit {
+export class ExpenseTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'date',
     'type',
@@ -27,7 +28,8 @@ export class ExpenseTableComponent implements OnInit {
     public dialog: MatDialog,
     public serv: ExpenseService,
     public userServ: UserService,
-    public dialogServ: DialogService
+    public dialogServ: DialogService,
+    public valServ: ValidationService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,24 @@ export class ExpenseTableComponent implements OnInit {
     if (this.userServ.user?.type === 'admin') {
       this.displayedColumns.unshift('userName');
       this.displayedColumns.push('actions');
+    }
+  }
+
+  ngAfterViewInit() {
+    this.clickedRows.clear();
+  }
+
+  checkValidation(exp: Expense) {
+    if (!exp.isManuallyValidated) {
+      this.valServ.autoValidate(exp);
+    }
+    const res = document.getElementById('validation-result');
+    if (res) {
+      res.setAttribute(
+        'id',
+        'validation-result' + Math.random().toString(16).slice(2)
+      );
+      res.style.display = 'flex';
     }
   }
 

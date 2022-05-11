@@ -37,7 +37,7 @@ export class WorkLeaveTableComponent implements OnInit {
         case 'date':
           return this.compare(a.date, b.date, isAsc);
         case 'hours':
-          return this.compare(a.hours, b.hours, isAsc);
+          return this.compare(a.totalDays, b.totalDays, isAsc);
         case 'type':
           return this.compare(a.type, b.type, isAsc);
         case 'approval':
