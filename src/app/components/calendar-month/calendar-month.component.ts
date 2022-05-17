@@ -6,13 +6,12 @@ import { CalendarService } from 'src/app/services/calendar.service';
 @Component({
   selector: 'app-calendar-month',
   templateUrl: './calendar-month.component.html',
-  styleUrls: ['./calendar-month.component.scss']
+  styleUrls: ['./calendar-month.component.scss'],
 })
 export class CalendarMonthComponent {
-
   activeYear = this.serv.activeYear;
 
- monthsList: SelectOptions[] = [
+  monthsList: SelectOptions[] = [
     { value: 0, viewValue: 'JAN' },
     { value: 1, viewValue: 'FEB' },
     { value: 2, viewValue: 'MAR' },
@@ -24,25 +23,23 @@ export class CalendarMonthComponent {
     { value: 8, viewValue: 'SEP' },
     { value: 9, viewValue: 'OCT' },
     { value: 10, viewValue: 'NOV' },
-    { value: 11, viewValue: 'DEC' }
-  ]
+    { value: 11, viewValue: 'DEC' },
+  ];
 
   @Output() dateSelected = new EventEmitter<Day>();
 
   constructor(public serv: CalendarService) {}
 
   onNextYear(): void {
-      this.activeYear++;
-      
+    this.activeYear++;
   }
   onPreviousYear(): void {
-      this.activeYear--;
+    this.activeYear--;
   }
 
   onMonthSelected(monthIndex: number) {
-const dayForMonthSelection = this.serv.createDay(1, monthIndex, this.activeYear);
+    const dayForMonthSelection = this.serv.createDay(1, monthIndex, this.activeYear);
     this.dateSelected.emit(dayForMonthSelection);
     console.log(dayForMonthSelection);
-    
   }
 }
