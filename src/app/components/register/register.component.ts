@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -10,10 +9,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-
   constructor(public serv: UserService, private router: Router) {}
 
-  userModel = this.serv.userModel; 
+  userModel = this.serv.userModel;
   spinnerVisible = false;
 
   registerEmployee(newUser: User) {

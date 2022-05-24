@@ -9,17 +9,19 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  constructor(
+    public serv: UserService,
+    private router: Router,
+    private snack: MatSnackBar
+  ) {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        this.login();
+      }
+    });
+  }
 
-  constructor(public serv: UserService, private router: Router,
-    private snack: MatSnackBar) {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          this.login();
-        }
-      })
-    }
-
-  userModel = this.serv.userModel; 
+  userModel = this.serv.userModel;
   spinnerVisible = false;
 
   login() {
