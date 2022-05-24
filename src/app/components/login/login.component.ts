@@ -20,12 +20,10 @@ export class LoginComponent {
     }
 
   userModel = this.serv.userModel; 
+  spinnerVisible = false;
 
   login() {
-    const spinner = document.getElementById('spinner-overlay');
-    if (spinner) {
-      spinner.style.display = 'flex';
-    }
+    this.spinnerVisible = true;
     this.serv
       .login(this.userModel.username, this.userModel.password)
       .subscribe({
@@ -34,9 +32,7 @@ export class LoginComponent {
           if (user) {
             this.router.navigate(['table']);
           } else {
-            if (spinner) {
-              spinner.style.display = 'none';
-            }
+            this.spinnerVisible = false;
             this.snack.open('User not Found!', '', {
               duration: 2 * 1000,
             });

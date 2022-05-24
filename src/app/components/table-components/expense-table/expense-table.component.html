@@ -83,7 +83,7 @@
                 color="accent" style="width: 100%">Check Validation</button>
         </mat-list-item>
 
-        <mat-list-item id="validation-result" style="display: none;">
+        <mat-list-item id="validation-result" [ngStyle]="{'display': validationResVisible ? 'flex' : 'none'}">
             <p *ngIf="clickedRow.approval === 'full'">
                 <mat-icon>done</mat-icon> <br> Reimbursed amount: {{"€ "+ clickedRow.reimbursement + ".00"}}
             </p>

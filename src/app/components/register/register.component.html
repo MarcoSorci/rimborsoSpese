@@ -34,6 +34,6 @@
 
 </div>
 
-<div id="spinner-overlay" style="display: none;">
+<div id="spinner-overlay" [ngStyle]="{'display': spinnerVisible ? 'flex' : 'none'}">
     <mat-spinner></mat-spinner>
 </div>

@@ -23,6 +23,7 @@ export class ExpenseTableComponent implements OnInit, AfterViewInit {
 
   dataSource = this.serv.expenseList;
   clickedRows = this.serv.clickedRows;
+  validationResVisible = false;
 
   constructor(
     public dialog: MatDialog,
@@ -48,14 +49,7 @@ export class ExpenseTableComponent implements OnInit, AfterViewInit {
     if (!exp.isManuallyValidated) {
       this.valServ.autoValidate(exp);
     }
-    const res = document.getElementById('validation-result');
-    if (res) {
-      res.setAttribute(
-        'id',
-        'validation-result' + Math.random().toString(16).slice(2)
-      );
-      res.style.display = 'flex';
-    }
+    this.validationResVisible = true;
   }
 
   sortData(sort: Sort) {

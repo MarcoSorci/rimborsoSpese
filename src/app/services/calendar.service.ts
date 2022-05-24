@@ -2,27 +2,26 @@ import { Injectable } from '@angular/core';
 import { Day } from '../models/day';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalendarService {
-
   date = new Date();
 
   activeYear = this.date.getFullYear();
   activeMonth = this.date.getMonth();
   firstDay!: Day;
 
-  constructor() { }
+  constructor() {}
 
   createDay(dayNumber: number, monthIndex: number, year: number): Day {
     let newDay = new Day();
     newDay.number = dayNumber;
     newDay.monthIndex = monthIndex;
     newDay.month = Day.getMonthName(monthIndex);
-    newDay.year = year
+    newDay.year = year;
     newDay.weekDayIndex = new Date(year, monthIndex, dayNumber - 1).getDay();
     newDay.weekDayName = Day.getWeekDayName(newDay.weekDayIndex);
-    newDay.dayId = newDay.number + newDay.monthIndex + newDay.year;
+    newDay.dayId = ('0' + newDay.number).slice(-2) + '' + ('0' + newDay.monthIndex).slice(-2) + '' + newDay.year;
     if (
       this.date.getDate() === dayNumber &&
       this.date.getMonth() === monthIndex &&
@@ -44,7 +43,7 @@ export class CalendarService {
 
     return days;
   }
-  
+
   getPreviousDays(daysArray: Day[], monthIndex: number, year: number) {
     let countDaysInPrevMonth = new Date(year, monthIndex, 0).getDate();
     let lastPrevDay = this.createDay(countDaysInPrevMonth, monthIndex, year);
@@ -69,6 +68,5 @@ export class CalendarService {
       this.firstDay.number++;
     }
   }
-
 
 }

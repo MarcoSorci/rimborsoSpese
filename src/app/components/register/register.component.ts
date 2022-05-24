@@ -14,12 +14,10 @@ export class RegisterComponent {
   constructor(public serv: UserService, private router: Router) {}
 
   userModel = this.serv.userModel; 
+  spinnerVisible = false;
 
   registerEmployee(newUser: User) {
-    const spinner = document.getElementById('spinner-overlay');
-    if (spinner) {
-      spinner.style.display = 'flex';
-    }
+    this.spinnerVisible = true;
     newUser = this.userModel;
     newUser.type = 'employee';
     this.serv.register(newUser).subscribe({
@@ -29,10 +27,7 @@ export class RegisterComponent {
   }
 
   registerAdmin(newUser: User) {
-    const spinner = document.getElementById('spinner-overlay');
-    if (spinner) {
-      spinner.style.display = 'flex';
-    }
+    this.spinnerVisible = true;
     newUser = this.userModel;
     newUser.type = 'admin';
     this.serv.register(newUser).subscribe({

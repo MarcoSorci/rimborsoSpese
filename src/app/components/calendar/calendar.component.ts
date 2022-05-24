@@ -94,7 +94,7 @@ export class CalendarComponent implements OnInit {
 
   createRange() {
     if (this.startingDay && this.endingDay) {
-      if (this.startingDay.number < this.endingDay.number) {
+      if (this.startingDay.dayId < this.endingDay.dayId) {
         for (let i = this.startingDay.number; i < this.endingDay.number; i++) {
           const newDay = this.serv.createDay(
             i,
@@ -109,8 +109,11 @@ export class CalendarComponent implements OnInit {
         this.rangeSelected.emit(this.rangeArray);
       } else {
         console.log('error, choose another range');
+        this.startingDay.isSelected = false;
+        this.endingDay.isSelected = false;
         this.startingDay = undefined;
         this.endingDay = undefined;
+        this.rangeArray.forEach((e) => this.checkIfSelected(e, true));
         this.rangeArray = [];
       }
     }

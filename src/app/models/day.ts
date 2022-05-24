@@ -8,7 +8,7 @@ export class Day {
   weekDayName!: string;
   weekDayIndex!: number;
 
-  dayId!: number;
+  dayId!: string;
 
   isToday?: boolean;
   isSelected?: boolean;
