@@ -30,6 +30,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { UserListComponent } from './components/table-components/user-list/user-list.component';
 import { UserlistDialogComponent } from './components/dialog-components/userlist-dialog/userlist-dialog.component';
@@ -85,6 +86,7 @@ import { CalendarMonthComponent } from './components/calendar-month/calendar-mon
     MatDialogModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
